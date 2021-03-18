@@ -39,4 +39,4 @@ myUnicodeChar = D
 myCopyrightChar = ©
 ```
 
-
+### Boolean

@@ -10,5 +10,13 @@ public class Main {
         System.out.println("myUnicodeChar = " + myUnicodeChar);
         char myCopyrightChar = '\u00A9';
         System.out.println("myCopyrightChar = " + myCopyrightChar);
+
+        // Boolean
+
+        boolean myTrueBooleanValue = true;
+        boolean myFalseBooleanValue = false;
+
+        boolean isCustomerOverTwentyOne = true;
+
     }
 }
