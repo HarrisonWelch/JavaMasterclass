@@ -29,7 +29,10 @@ public class SpeedConverter {
     }
 
     public static void printConversion(double kilometersPerHour){
-        if (kilometersPerHour < 0.00d) System.out.println("Invalid Value");
+        if (kilometersPerHour < 0.00d) {
+            System.out.println("Invalid Value");
+            return;
+        }
         System.out.println(
                 kilometersPerHour + " km/h = " +
                 SpeedConverter.toMilesPerHour(kilometersPerHour) + " mi/h");
@@ -42,7 +45,6 @@ Output
 1.5 km/h = 1 mi/h
 10.25 km/h = 6 mi/h
 Invalid Value
--5.6 km/h = -1 mi/h
 25.42 km/h = 16 mi/h
 75.114 km/h = 47 mi/h
 ```
