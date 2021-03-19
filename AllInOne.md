@@ -1933,3 +1933,824 @@ Option 2
 
 
 ----
+# Lec47IfElseRecap
+
+## Recap
+* an `if` statement will let a code block exe on a specific condition
+* A code block can have one or more than one statement inside.
+* `else` will allow a specific code block to run if the condition is false
+* `else if` will allow testing of multiple conditions
+
+## Basic Structure
+
+```java
+if (condition) {
+    // if statement (block)
+} else {
+    // else statement (block)
+}
+```
+
+## Example 1
+```java
+int score = 6000;
+
+if (score >= 5000) { // Java will set this as true
+    System.out.println("Your score was >= 5000"); // and exe this line
+} else if (score < 1000 && score >= 500) {
+    System.out.println("Your score was < 1000 but >= 500");
+} else {
+    System.out.println("Your score was < 500");
+}
+// then exit
+```
+output: `Your score was >= 5000`
+
+
+## Example 2
+```java
+int score = 800;
+
+if (score >= 5000) { // Java will see this as false
+    System.out.println("Your score was >= 5000"); 
+} else if (score < 1000 && score >= 500) { // Java will see this as true. score is between 1000 and 500 (lower inclusive)
+    System.out.println("Your score was < 1000 but >= 500"); // and exe this line
+} else {
+    System.out.println("Your score was < 500");
+}
+// then exit
+```
+output: `Your score was < 1000 but >= 500`
+
+## Example 2
+```java
+int score = 200;
+
+if (score >= 5000) { // Java will see this as false
+    System.out.println("Your score was >= 5000"); 
+} else if (score < 1000 && score >= 500) { // Java will see this as false
+    System.out.println("Your score was < 1000 but >= 500"); // and exe this line
+} else { // default is exe
+    System.out.println("Your score was < 500"); // and exe this line
+}
+// then exit
+```
+output: `Your score was < 500`
+
+
+----
+# Lec48MethodsInJava
+
+## Methods
+* We have been using method "main" all along
+
+### Define `calculateScore`
+```java
+    public static void calculateScore() {
+        boolean gameOver = true;
+        int score = 4000;
+        int levelCompleted = 5;
+        int bonus = 100;
+
+        if (gameOver) {
+            int finalScore = score + (levelCompleted * bonus);
+            finalScore += 1000;
+            System.out.println("Your final score was = " + finalScore);
+        }
+
+    }
+```
+
+## Passing information to a method
+* Tell the method what parameters/information
+* We can add parameters with to the functions parenthesis
+* Then pass them in the main method
+
+```java
+public class Main {
+
+    public static void main(String[] args) {
+        boolean gameOver = true;
+        int score = 4000;
+        int levelCompleted = 5;
+        int bonus = 100;
+
+        calculateScore(true, 800, levelCompleted, bonus);
+
+        score = 10000;
+        levelCompleted = 8;
+        bonus = 200;
+
+        if (gameOver) {
+            int finalScore = score + (levelCompleted * bonus);
+            System.out.println("Your final score was = " + finalScore);
+        }
+    }
+
+    public static void calculateScore(boolean gameOver, int score, int levelCompleted, int bonus) {
+        // We no longer need the variables in here
+
+        if (gameOver) {
+            int finalScore = score + (levelCompleted * bonus);
+            finalScore += 1000;
+            System.out.println("Your final score was = " + finalScore);
+        }
+
+    }
+
+}
+
+```
+ouput 
+```
+Your final score was = 2300
+Your final score was = 11600
+```
+Same as before
+
+## Cleaning further
+* Change the 2nd score calculation to be arguments passed into the function
+* Note: we changed the bonus to 2000
+
+```java
+    public static void main(String[] args) {
+        calculateScore(true, 800, 5, 100);
+        calculateScore(true, 10000, 8, 200); // Notice typing in the variables in directly
+    }
+
+    public static void calculateScore(boolean gameOver, int score, int levelCompleted, int bonus) {
+        // We no longer need the variables in here
+        if (gameOver) {
+            int finalScore = score + (levelCompleted * bonus);
+            finalScore += 2000;
+            System.out.println("Your final score was = " + finalScore);
+        }
+    }
+```
+
+output
+```
+Your final score was = 3300
+Your final score was = 13600
+```
+
+* Now we have two lines and the code looks cleaner
+
+## Now send back the result
+* Get the two of them to work together
+* `void` means don't send anything back
+* Lets return the `finalScore` instead
+* Note: `-1` is commonly used to indicate value not found. Especially in cases where the value cannot be positive or null
+
+## Full Code as of now
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        calculateScore(true, 800, 5, 100);
+        calculateScore(true, 10000, 8, 200); // Notice typing in the variables in directly
+    }
+
+    public static int calculateScore(boolean gameOver, int score, int levelCompleted, int bonus) {
+        // We no longer need the variables in here
+        if (gameOver) {
+            int finalScore = score + (levelCompleted * bonus);
+            finalScore += 2000;
+            System.out.println("Your final score was = " + finalScore);
+            return finalScore;
+        }
+        return -1;
+    }
+}
+```
+
+----
+# Lec49MoreMethods
+
+## More on Methods
+* return an int and log it to the console
+
+
+## Challenge
+* Create a method called displayHighScorePosition
+  * It should receive a players name and a 2nd param as a position in the high score table
+  * Display the player name with a message like " managed to get into position " and the position they got and a further message " on the high score table".
+* Create a 2nd method called calculateHighScorePosition
+  * It should be sent one argument only, the player score
+  * It return an int
+  * the return data should be
+    * `1` if the score is >1000
+    * `2` if the score is >500 and <1000
+    * `3` if the score is >100 and <500
+    * `4` if the score is >100 and <500
+  * Call both methods and display the results of the following
+    * A score of 1500, 900, 400, and 50
+* Note: a void method is often called a procedure
+* Note: a method can also be called a function. Interchangeable
+
+## My Answer
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        displayHighScorePosition("Mary", calculateHighScorePosition(1500));
+        displayHighScorePosition("Rashad", calculateHighScorePosition(900));
+        displayHighScorePosition("Z", calculateHighScorePosition(400));
+        displayHighScorePosition("Xylophone", calculateHighScorePosition(50));
+    }
+
+    public static void displayHighScorePosition(String playerName, int postionHighScoreTable) {
+        System.out.println(playerName + " managed to get into position " + postionHighScoreTable + " on the high score table");
+    }
+
+    public static int calculateHighScorePosition(int playerScore){
+        if (playerScore > 1000) {
+            return 1;
+        } else if (playerScore > 500 && playerScore < 1000) {
+            return 2;
+        } else if (playerScore > 100 && playerScore < 500) {
+            return 3;
+        } else {
+            return 4;
+        }
+    }
+
+}
+```
+ouput
+```
+Mary managed to get into position 1 on the high score table
+Rashad managed to get into position 2 on the high score table
+Z managed to get into position 3 on the high score table
+Xylophone managed to get into position 4 on the high score table
+```
+
+## Slight problem
+* We are using `<` and `>` so that it does not include the numbers 1000, 500, and 100.
+* To fix this we need only introduce `>=` and `<=` where applicable
+
+## Fixed
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        displayHighScorePosition("Mary", calculateHighScorePosition(1500));
+        displayHighScorePosition("Rashad", calculateHighScorePosition(900));
+        displayHighScorePosition("Z", calculateHighScorePosition(400));
+        displayHighScorePosition("Xylophone", calculateHighScorePosition(50));
+        displayHighScorePosition("Louise", calculateHighScorePosition(1000));
+        displayHighScorePosition("Marshall", calculateHighScorePosition(500));
+        displayHighScorePosition("Crystal", calculateHighScorePosition(100));
+    }
+
+    public static void displayHighScorePosition(String playerName, int postionHighScoreTable) {
+        System.out.println(playerName + " managed to get into position " + postionHighScoreTable + " on the high score table");
+    }
+
+    public static int calculateHighScorePosition(int playerScore){
+        if (playerScore >= 1000) {
+            return 1;
+        } else if (playerScore >= 500 && playerScore < 1000) {
+            return 2;
+        } else if (playerScore >= 100 && playerScore < 500) {
+            return 3;
+        } else {
+            return 4;
+        }
+    }
+
+}
+```
+output
+```
+Mary managed to get into position 1 on the high score table
+Rashad managed to get into position 2 on the high score table
+Z managed to get into position 3 on the high score table
+Xylophone managed to get into position 4 on the high score table
+Louise managed to get into position 1 on the high score table
+Marshall managed to get into position 2 on the high score table
+Crystal managed to get into position 3 on the high score table
+```
+
+# Future Optimizations
+* In an `if else` statement, we have knowledge in `else if` blocks that the previous `if` condition was false. So `...else if (playerScore >= 500 && playerScore < 1000)...` can be truncated to just `else if (playerScore >= 500)`.
+
+
+----
+# Lec50MethodChallengeFinal
+
+## Final Changes
+* In an `if else` statement, we have knowledge in `else if` blocks that the previous `if` condition was false. So `...else if (playerScore >= 500 && playerScore < 1000)...` can be truncated to just `else if (playerScore >= 500)`.
+* Then the `else` can be subbed for a simple return 4 as we have tested all other conditons as needed
+
+## Changed Function
+```java
+    public static int calculateHighScorePosition(int playerScore){
+        if (playerScore >= 1000) {
+            return 1;
+        } else if (playerScore >= 500) {
+            return 2;
+        } else if (playerScore >= 100) {
+            return 3;
+        }
+        return 4;
+    }
+```
+output is the same
+
+## More than 1 way to solve this
+```java
+    public static int calculateHighScorePosition(int playerScore){
+        int position = 4;
+        if (playerScore >= 1000) {
+            position = 1;
+        } else if (playerScore >= 500){
+            position = 2;
+        } else if (playerScore >= 100){
+            position = 3;
+        }
+        return position;
+    }
+```
+output is the same
+----
+# Lec51DiffMergeToolIntroduction
+
+## Intro
+* Help visually compare merge files
+* In the future, this will help with code repositories
+* When you get stuck this will help
+* Download the professors code and compare it to yours
+
+
+----
+# Lec52InstallDiffMerge
+
+## Install
+* Go to http://sourcegear.com/diffmerge/
+* Go to Downloads/DiffMerge (from the hover dropdown)
+* Install your appropriate installer
+
+
+
+----
+# Lec53UsingDiffMerge
+
+## Diff Merge
+* Use the folder button in the top left
+* Make the left folder your correct (more correct) solution
+* Make the right folder your target solution
+* Diff Merge will highlight all changes in all files recursively between both folders
+* Diff Merge will detect (most of the time) that a file has been changed outside of the program.
+  * Reload the folder(s)
+* "Apply from change from left" is a button in the top row
+  * It will adjust the right window to match the left
+  * Black bars will be placed on the changed code on the right
+  * Changes have not yet been made
+
+## Filtering
+* You can filter out some files to avoid useless info
+* `*.class` files are compiled java files
+* Under Tools / Options you will see "Folder Windows"
+* In the "Use file name filters"
+  * Make sure the box is checked
+  * Add `*.class` to avoid diffmerge from checking files it doesn't need to
+* Under subfolder filters place `.idea` in there to avoid any child files and the directory from being diffmerge compared.
+
+Example:
+```java
+        } else if (playerScore >= 100); { // <-- Introduced an error
+            position = 3;
+        }
+```
+This caused all output to say positon 3 b/c `position = 3;` is a code block without a condition
+
+output
+```
+Mary managed to get into position 3 on the high score table
+Rashad managed to get into position 3 on the high score table
+Z managed to get into position 3 on the high score table
+Xylophone managed to get into position 3 on the high score table
+Louise managed to get into position 3 on the high score table
+Marshall managed to get into position 3 on the high score table
+Crystal managed to get into position 3 on the high score table
+```
+
+----
+# Lec54CodingExercises
+
+## Coding Exercises
+* New Feature added in 2018
+* Coding problems are presented and the user can input their solution interactively
+
+# Example
+* Design a method called checkNumber with one param number as an int. if the number is > 0 return "positive", if the number is < 0 return "negative", if 0 return "zero"
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("checkNumber(42) = " + checkNumber(42));
+        System.out.println("checkNumber(0) = " + checkNumber(0));
+        System.out.println("checkNumber(-1) = " + checkNumber(-1));
+    }
+
+    public static String checkNumber(int number){
+        if (number == 0){
+            return "zero";
+        } else if (number > 0) {
+            return "positive";
+        }
+        return "negative";
+    }
+}
+```
+
+## Notes
+* Coding exercises need to be EXACT (very picky)
+  * Capitalization
+  * Static vs Non-static
+  * single method vs. > 1 method
+
+----
+# Lec55CodeExerciseExamplePart1
+
+Main
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("SpeedConverter.toMilesPerHour(1.5) = " + SpeedConverter.toMilesPerHour(1.5));
+        System.out.println("SpeedConverter.toMilesPerHour(10.25) = " + SpeedConverter.toMilesPerHour(10.25));
+        System.out.println("SpeedConverter.toMilesPerHour(-5.6) = " + SpeedConverter.toMilesPerHour(-5.6));
+        System.out.println("SpeedConverter.toMilesPerHour(25.42) = " + SpeedConverter.toMilesPerHour(25.42));
+        System.out.println("SpeedConverter.toMilesPerHour(75.114) = " + SpeedConverter.toMilesPerHour(75.114));
+    }
+
+}
+```
+
+Class SpeedConverter
+```java
+package com.company;
+
+public class SpeedConverter {
+
+    public static long toMilesPerHour(double kilometersPerHour) {
+        if (kilometersPerHour < 0.00d) return -1;
+        return Math.round(kilometersPerHour * 0.621371);
+    }
+}
+```
+
+output
+```
+SpeedConverter.toMilesPerHour(1.5) = 1
+SpeedConverter.toMilesPerHour(10.25) = 6
+SpeedConverter.toMilesPerHour(-5.6) = -1
+SpeedConverter.toMilesPerHour(25.42) = 16
+SpeedConverter.toMilesPerHour(75.114) = 47
+```
+
+----
+# Lec56CodingExercisesExamplePart2
+
+## Constructing the 2nd method `printConversion`
+
+Main
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        SpeedConverter.printConversion(1.5);
+        SpeedConverter.printConversion(10.25);
+        SpeedConverter.printConversion(-5.6);
+        SpeedConverter.printConversion(25.42);
+        SpeedConverter.printConversion(75.114);
+    }
+}
+```
+SpeedConverter
+```java
+package com.company;
+
+public class SpeedConverter {
+
+    public static long toMilesPerHour(double kilometersPerHour) {
+        if (kilometersPerHour < 0.00d) return -1;
+        return Math.round(kilometersPerHour * 0.621371);
+    }
+
+    public static void printConversion(double kilometersPerHour){
+        if (kilometersPerHour < 0.00d) {
+            System.out.println("Invalid Value");
+            return;
+        }
+        System.out.println(
+                kilometersPerHour + " km/h = " +
+                SpeedConverter.toMilesPerHour(kilometersPerHour) + " mi/h");
+    }
+}
+
+```
+Output
+```
+1.5 km/h = 1 mi/h
+10.25 km/h = 6 mi/h
+Invalid Value
+25.42 km/h = 16 mi/h
+75.114 km/h = 47 mi/h
+```
+
+----
+# Lec57p1CodingExercise1SpeedConverter
+
+## Solution
+```java
+    public static void printMegaBytesAndKiloBytes(int kiloBytes){
+        if (kiloBytes < 0) {
+            System.out.println("Invalid Value");
+            return;
+        }
+        int megeBytes = kiloBytes / 1024;
+        int kiloBytesRemainder = kiloBytes % 1024;
+        System.out.println(kiloBytes + " KB = "+megeBytes+" MB and "+kiloBytesRemainder+" KB");
+    }
+```
+
+## Test Main
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        MegaBytesConverter.printMegaBytesAndKiloBytes(2500);
+        MegaBytesConverter.printMegaBytesAndKiloBytes(-1024);
+        MegaBytesConverter.printMegaBytesAndKiloBytes(5000);
+    }
+}
+```
+output
+```
+2500 KB = 2 MB and 452 KB
+Invalid Value
+5000 KB = 4 MB and 904 KB
+```
+
+----
+# Lec57p2CodingExercise2MegaBytesConverter
+
+## Solution
+```java
+    public static void printMegaBytesAndKiloBytes(int kiloBytes){
+        if (kiloBytes < 0) {
+            System.out.println("Invalid Value");
+            return;
+        }
+        int megaBytes = kiloBytes / 1024;
+        int kiloBytesRemainder = kiloBytes % 1024;
+        System.out.println(kiloBytes + " KB = "+megaBytes+" MB and "+kiloBytesRemainder+" KB");
+    }
+```
+
+## Test Main
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        MegaBytesConverter.printMegaBytesAndKiloBytes(2500);
+        MegaBytesConverter.printMegaBytesAndKiloBytes(-1024);
+        MegaBytesConverter.printMegaBytesAndKiloBytes(5000);
+    }
+}
+```
+output
+```
+2500 KB = 2 MB and 452 KB
+Invalid Value
+5000 KB = 4 MB and 904 KB
+```
+
+----
+# Lec57p3CodingExercise3BarkingDog
+
+## Solution
+```java
+package com.company;
+
+public class BarkingDog {
+    public static boolean shouldWakeUp(boolean barking, int hourOfDay){
+        if (hourOfDay < 0 || hourOfDay > 23) return false;
+        return (barking && (hourOfDay > 22 || hourOfDay < 8));
+    }
+}
+```
+
+## Test Main
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    // write your code here
+        System.out.println("BarkingDog.shouldWakeUp(true, 1) = " + BarkingDog.shouldWakeUp(true, 1));
+        System.out.println("BarkingDog.shouldWakeUp(true, 1) = " + BarkingDog.shouldWakeUp(false, 2));
+        System.out.println("BarkingDog.shouldWakeUp(true, 1) = " + BarkingDog.shouldWakeUp(true, 8));
+        System.out.println("BarkingDog.shouldWakeUp(true, 1) = " + BarkingDog.shouldWakeUp(true, -1));
+    }
+}
+```
+output
+```
+BarkingDog.shouldWakeUp(true, 1) = true
+BarkingDog.shouldWakeUp(true, 1) = false
+BarkingDog.shouldWakeUp(true, 1) = false
+BarkingDog.shouldWakeUp(true, 1) = false
+```
+
+----
+# Lec57p4CodingExercise4LeapYearCalculator
+
+## Solution
+```java
+package com.company;
+
+public class LeapYear {
+    public static boolean isLeapYear(int year){
+        if (year < 1 || year > 9999) return false;
+        return (year % 4 == 0 && !(year % 100 == 0)) || year % 400 == 0;
+    }
+}
+```
+
+## Test Main
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("LeapYear.isLeapYear(-1600) = " + LeapYear.isLeapYear(-1600));
+        System.out.println("LeapYear.isLeapYear(1600) = " + LeapYear.isLeapYear(1600));
+        System.out.println("LeapYear.isLeapYear(2017) = " + LeapYear.isLeapYear(2017));
+        System.out.println("LeapYear.isLeapYear(2000) = " + LeapYear.isLeapYear(2000));
+    }
+}
+```
+output
+```
+LeapYear.isLeapYear(-1600) = false
+LeapYear.isLeapYear(1600) = true
+LeapYear.isLeapYear(2017) = false
+LeapYear.isLeapYear(2000) = true
+```
+
+----
+# Lec57p5CodingExercise5DecimalComparator
+
+## Solution
+```java
+package com.company;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
+public class DecimalComparator {
+    public static boolean areEqualByThreeDecimalPlaces(double num1, double num2){
+        DecimalFormat df = new DecimalFormat("#######.###");
+        df.setRoundingMode(RoundingMode.DOWN);
+        return (df.format(num1)).equals(df.format(num2));
+    }
+}
+
+```
+
+## Test Main
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("DecimalComparator.areEqualbyThreeDecimalPlaces(-3.1756, -3.175) = " +
+                DecimalComparator.areEqualByThreeDecimalPlaces(-3.1756, -3.175));
+        System.out.println("DecimalComparator.areEqualbyThreeDecimalPlaces(-3.176, -3.175) = " +
+                DecimalComparator.areEqualByThreeDecimalPlaces(-3.176, -3.175));
+        System.out.println("DecimalComparator.areEqualbyThreeDecimalPlaces(3.0, 3.0) = " +
+                DecimalComparator.areEqualByThreeDecimalPlaces(3.0, 3.0));
+        System.out.println("DecimalComparator.areEqualbyThreeDecimalPlaces(-3.123, 3.123) = " +
+                DecimalComparator.areEqualByThreeDecimalPlaces(-3.123, 3.123));
+    }
+}
+```
+output
+```
+DecimalComparator.areEqualbyThreeDecimalPlaces(-3.1756, -3.175) = true
+DecimalComparator.areEqualbyThreeDecimalPlaces(-3.176, -3.175) = false
+DecimalComparator.areEqualbyThreeDecimalPlaces(3.0, 3.0) = true
+DecimalComparator.areEqualbyThreeDecimalPlaces(-3.123, 3.123) = false
+```
+
+----
+# Lec57p6CodingExercise6EqualSumChecker
+
+## Solution
+```java
+package com.company;
+
+public class EqualSumChecker {
+    public static boolean hasEqualSum(int num1, int num2, int num3){
+        return (num1 + num2) == num3;
+    }
+}
+```
+
+## Test Main
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("EqualSumChecker.hasEqualSum(1, 1, 1) = " + EqualSumChecker.hasEqualSum(1, 1, 1));
+        System.out.println("EqualSumChecker.hasEqualSum(1, 1, 2) = " + EqualSumChecker.hasEqualSum(1, 1, 2));
+        System.out.println("EqualSumChecker.hasEqualSum(1, -1, 0) = " + EqualSumChecker.hasEqualSum(1, -1, 0));
+    }
+}
+```
+output
+```
+EqualSumChecker.hasEqualSum(1, 1, 1) = false
+EqualSumChecker.hasEqualSum(1, 1, 2) = true
+EqualSumChecker.hasEqualSum(1, -1, 0) = true
+```
+
+----
+# Lec57p7CodingExercise7TeenNumberChecker
+
+## Solution
+```java
+package com.company;
+
+public class TeenNumberChecker {
+    public static boolean hasTeen(int p1, int p2, int p3){
+        return isTeen(p1) ||
+               isTeen(p2) ||
+               isTeen(p3);
+    }
+    public static boolean isTeen(int p1){
+        return (p1 >= 13 && p1 <= 19);
+    }
+}
+```
+
+## Test Main
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("TeenNumberChecker.hasTeen( 9,99,19) = " + TeenNumberChecker.hasTeen( 9,99,19));
+        System.out.println("TeenNumberChecker.hasTeen(25,15,42) = " + TeenNumberChecker.hasTeen(25,15,42));
+        System.out.println("TeenNumberChecker.hasTeen(22,23,24) = " + TeenNumberChecker.hasTeen(22,23,24));
+
+        System.out.println("TeenNumberChecker.isTeen( 9) = " + TeenNumberChecker.isTeen( 9));
+        System.out.println("TeenNumberChecker.isTeen(13) = " + TeenNumberChecker.isTeen(13));
+    }
+}
+```
+output
+```
+TeenNumberChecker.hasTeen( 9,99,19) = true
+TeenNumberChecker.hasTeen(25,15,42) = true
+TeenNumberChecker.hasTeen(22,23,24) = false
+TeenNumberChecker.isTeen( 9) = false
+TeenNumberChecker.isTeen(13) = true
+```
+
+----
