@@ -1640,6 +1640,435 @@ Got some remainder
   * Goal is to learn Java
 
 ----
+# Lec 61 p3 Int Equality Printer
+
+## Summary
+* If any number is < 0 print invalid value
+* If all 3 numbers are equal print "All numbers are equal"
+* If all 3 numbers are different print "All numbers are different"
+* Else print "Neither all are equal or different"
+
+## Solution
+```java
+package com.company;
+
+public class Main {
+
+    private static final String INVALID_VALUE = "Invalid Value";
+
+    public static void main(String[] args) {
+        // IntEqualityPrinter
+        printEqual(1,1,1);
+        printEqual(1,1,2);
+        printEqual(-1,-1,-1);
+        printEqual(1,2,3);
+    }
+
+    public static void printEqual(int a, int b, int c){
+        if (a < 0 || b < 0 || c < 0) {
+            System.out.println(INVALID_VALUE);
+            return;
+        }
+        if (a == b && a == c) {
+            System.out.println("All numbers are equal");
+            return;
+        }
+        if (a != b && a != c && b != c) {
+            System.out.println("All numbers are different");
+            return;
+        }
+        System.out.println("Neither all are equal or different");
+        return;
+    }
+}
+```
+Output
+```
+All numbers are equal
+Neither all are equal or different
+Invalid Value
+All numbers are different
+```
+
+----
+# Lec61p4PlayingCat.md
+
+## Summary
+* If any number is < 0 print invalid value
+* If all 3 numbers are equal print "All numbers are equal"
+* If all 3 numbers are different print "All numbers are different"
+* Else print "Neither all are equal or different"
+
+## Soltion
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // PlayingCat
+        System.out.println("isCatPlaying(true, 25) = " + isCatPlaying(true, 25));
+        System.out.println("isCatPlaying(false, 36) = " + isCatPlaying(false, 36));
+        System.out.println("isCatPlaying(false, 35) = " + isCatPlaying(false, 35));
+        System.out.println("isCatPlaying(true, 33) = " + isCatPlaying(true, 33));
+    }
+    public static boolean isCatPlaying(boolean summer, int temperature){
+        return (summer) ?
+                (temperature >= 25 && temperature <= 45) :
+                (temperature >= 25 && temperature <= 35);
+    }
+}
+```
+Output
+```
+isCatPlaying(true, 25) = true
+isCatPlaying(false, 36) = false
+isCatPlaying(false, 35) = true
+isCatPlaying(true, 33) = true
+```
+
+----
+# Lec57p1CodingExercise1SpeedConverter
+
+## Solution
+```java
+    public static void printMegaBytesAndKiloBytes(int kiloBytes){
+        if (kiloBytes < 0) {
+            System.out.println("Invalid Value");
+            return;
+        }
+        int megeBytes = kiloBytes / 1024;
+        int kiloBytesRemainder = kiloBytes % 1024;
+        System.out.println(kiloBytes + " KB = "+megeBytes+" MB and "+kiloBytesRemainder+" KB");
+    }
+```
+
+## Test Main
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        MegaBytesConverter.printMegaBytesAndKiloBytes(2500);
+        MegaBytesConverter.printMegaBytesAndKiloBytes(-1024);
+        MegaBytesConverter.printMegaBytesAndKiloBytes(5000);
+    }
+}
+```
+output
+```
+2500 KB = 2 MB and 452 KB
+Invalid Value
+5000 KB = 4 MB and 904 KB
+```
+
+----
+# Lec57p2CodingExercise2MegaBytesConverter
+
+## Solution
+```java
+    public static void printMegaBytesAndKiloBytes(int kiloBytes){
+        if (kiloBytes < 0) {
+            System.out.println("Invalid Value");
+            return;
+        }
+        int megaBytes = kiloBytes / 1024;
+        int kiloBytesRemainder = kiloBytes % 1024;
+        System.out.println(kiloBytes + " KB = "+megaBytes+" MB and "+kiloBytesRemainder+" KB");
+    }
+```
+
+## Test Main
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        MegaBytesConverter.printMegaBytesAndKiloBytes(2500);
+        MegaBytesConverter.printMegaBytesAndKiloBytes(-1024);
+        MegaBytesConverter.printMegaBytesAndKiloBytes(5000);
+    }
+}
+```
+output
+```
+2500 KB = 2 MB and 452 KB
+Invalid Value
+5000 KB = 4 MB and 904 KB
+```
+
+----
+# Lec57p3CodingExercise3BarkingDog
+
+## Solution
+```java
+package com.company;
+
+public class BarkingDog {
+    public static boolean shouldWakeUp(boolean barking, int hourOfDay){
+        if (hourOfDay < 0 || hourOfDay > 23) return false;
+        return (barking && (hourOfDay > 22 || hourOfDay < 8));
+    }
+}
+```
+
+## Test Main
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    // write your code here
+        System.out.println("BarkingDog.shouldWakeUp(true, 1) = " + BarkingDog.shouldWakeUp(true, 1));
+        System.out.println("BarkingDog.shouldWakeUp(true, 1) = " + BarkingDog.shouldWakeUp(false, 2));
+        System.out.println("BarkingDog.shouldWakeUp(true, 1) = " + BarkingDog.shouldWakeUp(true, 8));
+        System.out.println("BarkingDog.shouldWakeUp(true, 1) = " + BarkingDog.shouldWakeUp(true, -1));
+    }
+}
+```
+output
+```
+BarkingDog.shouldWakeUp(true, 1) = true
+BarkingDog.shouldWakeUp(true, 1) = false
+BarkingDog.shouldWakeUp(true, 1) = false
+BarkingDog.shouldWakeUp(true, 1) = false
+```
+
+----
+# Lec57p4CodingExercise4LeapYearCalculator
+
+## Solution
+```java
+package com.company;
+
+public class LeapYear {
+    public static boolean isLeapYear(int year){
+        if (year < 1 || year > 9999) return false;
+        return (year % 4 == 0 && !(year % 100 == 0)) || year % 400 == 0;
+    }
+}
+```
+
+## Test Main
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("LeapYear.isLeapYear(-1600) = " + LeapYear.isLeapYear(-1600));
+        System.out.println("LeapYear.isLeapYear(1600) = " + LeapYear.isLeapYear(1600));
+        System.out.println("LeapYear.isLeapYear(2017) = " + LeapYear.isLeapYear(2017));
+        System.out.println("LeapYear.isLeapYear(2000) = " + LeapYear.isLeapYear(2000));
+    }
+}
+```
+output
+```
+LeapYear.isLeapYear(-1600) = false
+LeapYear.isLeapYear(1600) = true
+LeapYear.isLeapYear(2017) = false
+LeapYear.isLeapYear(2000) = true
+```
+
+----
+# Lec57p5CodingExercise5DecimalComparator
+
+## Solution
+```java
+package com.company;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
+public class DecimalComparator {
+    public static boolean areEqualByThreeDecimalPlaces(double num1, double num2){
+        DecimalFormat df = new DecimalFormat("#######.###");
+        df.setRoundingMode(RoundingMode.DOWN);
+        return (df.format(num1)).equals(df.format(num2));
+    }
+}
+
+```
+
+## Test Main
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("DecimalComparator.areEqualbyThreeDecimalPlaces(-3.1756, -3.175) = " +
+                DecimalComparator.areEqualByThreeDecimalPlaces(-3.1756, -3.175));
+        System.out.println("DecimalComparator.areEqualbyThreeDecimalPlaces(-3.176, -3.175) = " +
+                DecimalComparator.areEqualByThreeDecimalPlaces(-3.176, -3.175));
+        System.out.println("DecimalComparator.areEqualbyThreeDecimalPlaces(3.0, 3.0) = " +
+                DecimalComparator.areEqualByThreeDecimalPlaces(3.0, 3.0));
+        System.out.println("DecimalComparator.areEqualbyThreeDecimalPlaces(-3.123, 3.123) = " +
+                DecimalComparator.areEqualByThreeDecimalPlaces(-3.123, 3.123));
+    }
+}
+```
+output
+```
+DecimalComparator.areEqualbyThreeDecimalPlaces(-3.1756, -3.175) = true
+DecimalComparator.areEqualbyThreeDecimalPlaces(-3.176, -3.175) = false
+DecimalComparator.areEqualbyThreeDecimalPlaces(3.0, 3.0) = true
+DecimalComparator.areEqualbyThreeDecimalPlaces(-3.123, 3.123) = false
+```
+
+----
+# Lec57p6CodingExercise6EqualSumChecker
+
+## Solution
+```java
+package com.company;
+
+public class EqualSumChecker {
+    public static boolean hasEqualSum(int num1, int num2, int num3){
+        return (num1 + num2) == num3;
+    }
+}
+```
+
+## Test Main
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("EqualSumChecker.hasEqualSum(1, 1, 1) = " + EqualSumChecker.hasEqualSum(1, 1, 1));
+        System.out.println("EqualSumChecker.hasEqualSum(1, 1, 2) = " + EqualSumChecker.hasEqualSum(1, 1, 2));
+        System.out.println("EqualSumChecker.hasEqualSum(1, -1, 0) = " + EqualSumChecker.hasEqualSum(1, -1, 0));
+    }
+}
+```
+output
+```
+EqualSumChecker.hasEqualSum(1, 1, 1) = false
+EqualSumChecker.hasEqualSum(1, 1, 2) = true
+EqualSumChecker.hasEqualSum(1, -1, 0) = true
+```
+
+----
+# Lec57p7CodingExercise7TeenNumberChecker
+
+## Solution
+```java
+package com.company;
+
+public class TeenNumberChecker {
+    public static boolean hasTeen(int p1, int p2, int p3){
+        return isTeen(p1) ||
+               isTeen(p2) ||
+               isTeen(p3);
+    }
+    public static boolean isTeen(int p1){
+        return (p1 >= 13 && p1 <= 19);
+    }
+}
+```
+
+## Test Main
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("TeenNumberChecker.hasTeen( 9,99,19) = " + TeenNumberChecker.hasTeen( 9,99,19));
+        System.out.println("TeenNumberChecker.hasTeen(25,15,42) = " + TeenNumberChecker.hasTeen(25,15,42));
+        System.out.println("TeenNumberChecker.hasTeen(22,23,24) = " + TeenNumberChecker.hasTeen(22,23,24));
+
+        System.out.println("TeenNumberChecker.isTeen( 9) = " + TeenNumberChecker.isTeen( 9));
+        System.out.println("TeenNumberChecker.isTeen(13) = " + TeenNumberChecker.isTeen(13));
+    }
+}
+```
+output
+```
+TeenNumberChecker.hasTeen( 9,99,19) = true
+TeenNumberChecker.hasTeen(25,15,42) = true
+TeenNumberChecker.hasTeen(22,23,24) = false
+TeenNumberChecker.isTeen( 9) = false
+TeenNumberChecker.isTeen(13) = true
+```
+
+----
+# Lec 61 p1 Area Calculator
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // AreaCalculator
+    }
+    public static double area(double radius){
+        if (radius < 0) return -1;
+        return radius * radius * Math.PI;
+    }
+    public static double area(double x, double y){
+        if (x < 0 || y < 0) return -1;
+        return x * y;
+    }
+}
+```
+
+----
+# Lec 61 p2 Minutes To Years Days Calculator
+
+## Problem Summary
+* Convert minutes to years and days
+* If < 0 print invalid value
+
+## Solution
+```java
+package com.company;
+
+public class Main {
+    private static final String INVALID_VALUE = "Invalid Value";
+
+    public static void main(String[] args) {
+        // MinutesToYearsDaysCalculator
+        printYearsAndDays(525600);
+        printYearsAndDays(1051200);
+        printYearsAndDays(561600);
+
+    }
+    public static void printYearsAndDays(long minutes){
+        if (minutes < 0) {
+            System.out.println(INVALID_VALUE);
+            return;
+        }
+        long years = minutes / (365 * 24 * 60);
+        long days = (minutes % (365 * 24 * 60)) / (24*60);
+        System.out.println(minutes + " min = " + years + " y and " + days + " d");
+        return;
+    }
+}
+```
+Output
+```
+525600 min = 1 y and 0 d
+1051200 min = 2 y and 0 d
+561600 min = 1 y and 25 d
+```
+
+
+----
 # Lec43Introduction
 
 ## Intro
@@ -2476,281 +2905,255 @@ Invalid Value
 ```
 
 ----
-# Lec57p1CodingExercise1SpeedConverter
+# Lec58MethodOverloading
+
+## Method Overloading
+* Defining several methods of the same name but with diff arguments (number or type)
+* Create a unique method signature
+  * Same name
+  * Diff arguments (number or type)
+* Cannot change return type (without also changing the arguments)
+
+## EXAMPLE
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        int newScore = calculateScore("Tim", 500);
+        System.out.println("New score is " + newScore);
+        calculateScore();
+    }
+
+    public static int calculateScore(String playername, int score){
+        System.out.println("Player " + playername + " scored " + score + " points.");
+        return score * 1000;
+    }
+
+    public static int calculateScore(int score){
+        System.out.println("Unnamed player scored " + score + " points.");
+        return score * 1000;
+    }
+
+    public static int calculateScore(){
+        System.out.println("Unnamed player scored, no player score.");
+        return 0;
+    }
+
+}
+```
+
+## Challenge
+* Create a method called calcFeetAndInchesToCentimeters
+  * It needs to have two parameters.
+  * feet is the first parameter, inches, is the 2nd parameter
+  * You should validate that the first parameter feet is >= 0
+  * You should validate that the 2nd parameter inches is >= 0 and <= 12
+  * return -1 from the method if either of the above is not true
+  * If the parameters are valid, then calculate how many centimeters comprised the feet and inches passed to this method and return that value
+* Create a 2nd method of the same name but with only one parameter inches is the parameter
+  * validate that it is >= 0
+  * return -1 if it is not true
+  * But if its valid, then calculate how many feet are in the inches and then
+* here is the tricky part
+  * call the other overloaded method passing in the correct feet and inches calculated so that it can calculate correctly.
+* hints:
+  * use double for your number data types is probably a good idea 1 inch = 2.54cm and 1 ft = 12 inches
+  * use the link I give
+  * Calling the correct overloaded method requires you to use the right number of arguments
+
+## Solution
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        System.out.println("calcFeetAndInchesToCentimeters(4,5) = " + calcFeetAndInchesToCentimeters(4,5));
+        System.out.println("calcFeetAndInchesToCentimeters(3,16) = " + calcFeetAndInchesToCentimeters(3,16));
+        System.out.println("calcFeetAndInchesToCentimeters(-1,11) = " + calcFeetAndInchesToCentimeters(-1,11));
+        System.out.println("calcFeetAndInchesToCentimeters(16) = " + calcFeetAndInchesToCentimeters(16));
+        System.out.println("calcFeetAndInchesToCentimeters(1000) = " + calcFeetAndInchesToCentimeters(1000));
+        System.out.println("calcFeetAndInchesToCentimeters(-12) = " + calcFeetAndInchesToCentimeters(-12));
+    }
+
+    public static double calcFeetAndInchesToCentimeters(int feet, int inches){
+        if (feet < 0) return -1;
+        if (inches < 0 || inches > 12) return -1;
+        int totalInches = (feet * 12) + inches;
+        return totalInches * 2.54;
+    }
+
+    public static double calcFeetAndInchesToCentimeters(int inches){
+        if (inches < 0) return -1;
+        int feet = inches / 12;
+        int remInches = inches % 12;
+        return calcFeetAndInchesToCentimeters(feet, remInches);
+    }
+
+}
+
+```
+Output
+```
+calcFeetAndInchesToCentimeters(4,5) = 134.62
+calcFeetAndInchesToCentimeters(3,16) = -1.0
+calcFeetAndInchesToCentimeters(-1,11) = -1.0
+calcFeetAndInchesToCentimeters(16) = 40.64
+calcFeetAndInchesToCentimeters(1000) = 2540.0
+calcFeetAndInchesToCentimeters(-12) = -1.0
+```
+
+----
+# Lec59MethodOverloadingRecap
+
+## Method Overloading
+* A feature that allows more than one method with the same name so long as we use different parameters (number and type)
+* Allows diff implementations with different types or number of variables
+* You can also mix in other implementations for easier flow
+
+## Example
+* Suppose you have a method that can do 
+  * the sum of 2 numbers
+  * the sum of 3 numbers
+  * And the sum of 4 numbers
+* Each method would have the number of args passed to it.
+
+Bad Practice
+```java
+    public static int sumTwoNumbers(int a, int b){
+        return a + b;
+    }
+    public static int sumThreeNumbers(int a, int b, int c){
+        return a + b + c;
+    }
+    public static int sumFourNumbers(int a, int b, int c, int d){
+        return a + b + c + d;
+    }
+```
+
+Good Practice
+```java
+    public static int sum(int a, int b){
+        return a + b;
+    }
+    public static int sum(int a, int b, int c){
+        return a + b + c;
+    }
+    public static int sum(int a, int b, int c, int d){
+        return a + b + c + d;
+    }
+```
+
+### `sum` is easier to remember and use.
+
+## Final Notes
+* Easier to remember one name
+* Improve readability
+* Add flexibility with diff types of data.
+* Less work, more readable
+
+----
+# Lec 60 Seconds And Minutes Challenge
+
+## Challenge
+* Create a method called getDurationString with 2 params, 1st param minutes and 2nd param seconds.
+* Validate first param is >= 0
+* Validate 2nd parameter seconds is >= 0 and <= 59
+* The method should return "Invalid value" in the method if either of the above are not true.
+* If the parameters are valid then calculate how many hours minutes and seconds equal the minutes and seconds passed to this method and return that value as string in format "XXh YYm ZZs" where XX represent a number of hours, YY the minutes, and ZZ the seconds.
+* Create a 2nd method of the same name but with only one parameter seconds
+  * validate that it is >= 0 and return invalid value if not true
+  * if true pass to the overloaded method
 
 ## Solution
 ```java
-    public static void printMegaBytesAndKiloBytes(int kiloBytes){
-        if (kiloBytes < 0) {
-            System.out.println("Invalid Value");
-            return;
+package com.company;
+
+public class Main {
+    //    * Create a method called getDurationString with 2 params, 1st param minutes and 2nd param seconds.
+    //    * Validate first param is >= 0
+    //            * Validate 2nd parameter seconds is >= 0 and <= 59
+    //            * The method should return "Invalid value" in the method if either of the above are not true.
+    //            * If the parameters are valid then calculate how many hours minutes and seconds equal the minutes and seconds passed to this method and return that value as string in format "XXh YYm ZZs" where XX represent a number of hours, YY the minutes, and ZZ the seconds.
+    //    * Create a 2nd method of the same name but with only one parameter seconds
+    //            * validate that it is >= 0 and return invalid value if not true
+    //            * if true pass to the overloaded method
+    public static void main(String[] args) {
+        // SecondsAndMinutesChallenge
+        System.out.println("getDurationString(12, 12) = " + getDurationString(12, 12));
+        System.out.println("getDurationString(-15, 3) = " + getDurationString(-15, 3));
+        System.out.println("getDurationString(15, -3) = " + getDurationString(15, -3));
+        System.out.println("getDurationString(100) = " + getDurationString(100));
+        System.out.println("getDurationString(-100) = " + getDurationString(-100));
+    }
+    private static String getDurationString(long minutes, long seconds){
+        if (minutes < 0 || seconds < 0 || seconds > 59) return "Invalid value";
+        long hours = minutes / 60;
+        long minutesRemaining = minutes % 60;
+        return hours + "h " + minutesRemaining + "m " + seconds + "s";
+    }
+    private static String getDurationString(long seconds){
+        if (seconds < 0) return "Invalid value";
+        long minutes = seconds / 60;
+        long secondsRemaining = seconds % 60;
+        return getDurationString(minutes, secondsRemaining);
+    }
+}
+
+```
+----
+# Lec 61 Bonus Challenge
+
+## Going from the Seconds And Minutes Challenge from Lec 60
+* Zero pad the hours, minutes, seconds
+* Use final values
+
+## Updated solution
+```java
+package com.company;
+
+public class Main {
+    private static final String INVALID_VALUE_MESSAGE = "Invalid value"; // final means value can't change
+
+    public static void main(String[] args) {
+        // SecondsAndMinutesChallenge
+        System.out.println("getDurationString(12, 12) = " + getDurationString(12, 12));
+        System.out.println("getDurationString(-15, 3) = " + getDurationString(-15, 3));
+        System.out.println("getDurationString(15, -3) = " + getDurationString(15, -3));
+        System.out.println("getDurationString(100) = " + getDurationString(100));
+        System.out.println("getDurationString(-100) = " + getDurationString(-100));
+    }
+    private static String getDurationString(long minutes, long seconds){
+        if (minutes < 0 || seconds < 0 || seconds > 59) return INVALID_VALUE_MESSAGE;
+        long hours = minutes / 60;
+        long minutesRemaining = minutes % 60;
+        String hoursString = hours + "h ";
+        if (hours < 10) {
+            hoursString = "0" + hours;
         }
-        int megeBytes = kiloBytes / 1024;
-        int kiloBytesRemainder = kiloBytes % 1024;
-        System.out.println(kiloBytes + " KB = "+megeBytes+" MB and "+kiloBytesRemainder+" KB");
-    }
-```
-
-## Test Main
-
-```java
-package com.company;
-
-public class Main {
-
-    public static void main(String[] args) {
-        MegaBytesConverter.printMegaBytesAndKiloBytes(2500);
-        MegaBytesConverter.printMegaBytesAndKiloBytes(-1024);
-        MegaBytesConverter.printMegaBytesAndKiloBytes(5000);
-    }
-}
-```
-output
-```
-2500 KB = 2 MB and 452 KB
-Invalid Value
-5000 KB = 4 MB and 904 KB
-```
-
-----
-# Lec57p2CodingExercise2MegaBytesConverter
-
-## Solution
-```java
-    public static void printMegaBytesAndKiloBytes(int kiloBytes){
-        if (kiloBytes < 0) {
-            System.out.println("Invalid Value");
-            return;
+        String minutesString = minutesRemaining + "h";
+        if (minutesRemaining < 10) {
+            minutesString = "0" + minutesRemaining;
         }
-        int megaBytes = kiloBytes / 1024;
-        int kiloBytesRemainder = kiloBytes % 1024;
-        System.out.println(kiloBytes + " KB = "+megaBytes+" MB and "+kiloBytesRemainder+" KB");
+        String secondsString = seconds + "s";
+        if (seconds < 10) {
+            secondsString = "0" + seconds;
+        }
+        return hoursString + " " + minutesString + " " + secondsString;
     }
-```
-
-## Test Main
-
-```java
-package com.company;
-
-public class Main {
-
-    public static void main(String[] args) {
-        MegaBytesConverter.printMegaBytesAndKiloBytes(2500);
-        MegaBytesConverter.printMegaBytesAndKiloBytes(-1024);
-        MegaBytesConverter.printMegaBytesAndKiloBytes(5000);
-    }
-}
-```
-output
-```
-2500 KB = 2 MB and 452 KB
-Invalid Value
-5000 KB = 4 MB and 904 KB
-```
-
-----
-# Lec57p3CodingExercise3BarkingDog
-
-## Solution
-```java
-package com.company;
-
-public class BarkingDog {
-    public static boolean shouldWakeUp(boolean barking, int hourOfDay){
-        if (hourOfDay < 0 || hourOfDay > 23) return false;
-        return (barking && (hourOfDay > 22 || hourOfDay < 8));
-    }
-}
-```
-
-## Test Main
-
-```java
-package com.company;
-
-public class Main {
-
-    public static void main(String[] args) {
-	    // write your code here
-        System.out.println("BarkingDog.shouldWakeUp(true, 1) = " + BarkingDog.shouldWakeUp(true, 1));
-        System.out.println("BarkingDog.shouldWakeUp(true, 1) = " + BarkingDog.shouldWakeUp(false, 2));
-        System.out.println("BarkingDog.shouldWakeUp(true, 1) = " + BarkingDog.shouldWakeUp(true, 8));
-        System.out.println("BarkingDog.shouldWakeUp(true, 1) = " + BarkingDog.shouldWakeUp(true, -1));
-    }
-}
-```
-output
-```
-BarkingDog.shouldWakeUp(true, 1) = true
-BarkingDog.shouldWakeUp(true, 1) = false
-BarkingDog.shouldWakeUp(true, 1) = false
-BarkingDog.shouldWakeUp(true, 1) = false
-```
-
-----
-# Lec57p4CodingExercise4LeapYearCalculator
-
-## Solution
-```java
-package com.company;
-
-public class LeapYear {
-    public static boolean isLeapYear(int year){
-        if (year < 1 || year > 9999) return false;
-        return (year % 4 == 0 && !(year % 100 == 0)) || year % 400 == 0;
-    }
-}
-```
-
-## Test Main
-
-```java
-package com.company;
-
-public class Main {
-
-    public static void main(String[] args) {
-        System.out.println("LeapYear.isLeapYear(-1600) = " + LeapYear.isLeapYear(-1600));
-        System.out.println("LeapYear.isLeapYear(1600) = " + LeapYear.isLeapYear(1600));
-        System.out.println("LeapYear.isLeapYear(2017) = " + LeapYear.isLeapYear(2017));
-        System.out.println("LeapYear.isLeapYear(2000) = " + LeapYear.isLeapYear(2000));
-    }
-}
-```
-output
-```
-LeapYear.isLeapYear(-1600) = false
-LeapYear.isLeapYear(1600) = true
-LeapYear.isLeapYear(2017) = false
-LeapYear.isLeapYear(2000) = true
-```
-
-----
-# Lec57p5CodingExercise5DecimalComparator
-
-## Solution
-```java
-package com.company;
-
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-
-public class DecimalComparator {
-    public static boolean areEqualByThreeDecimalPlaces(double num1, double num2){
-        DecimalFormat df = new DecimalFormat("#######.###");
-        df.setRoundingMode(RoundingMode.DOWN);
-        return (df.format(num1)).equals(df.format(num2));
+    private static String getDurationString(long seconds){
+        if (seconds < 0) return INVALID_VALUE_MESSAGE;
+        long minutes = seconds / 60;
+        long secondsRemaining = seconds % 60;
+        return getDurationString(minutes, secondsRemaining);
     }
 }
 
-```
-
-## Test Main
-
-```java
-package com.company;
-
-public class Main {
-
-    public static void main(String[] args) {
-        System.out.println("DecimalComparator.areEqualbyThreeDecimalPlaces(-3.1756, -3.175) = " +
-                DecimalComparator.areEqualByThreeDecimalPlaces(-3.1756, -3.175));
-        System.out.println("DecimalComparator.areEqualbyThreeDecimalPlaces(-3.176, -3.175) = " +
-                DecimalComparator.areEqualByThreeDecimalPlaces(-3.176, -3.175));
-        System.out.println("DecimalComparator.areEqualbyThreeDecimalPlaces(3.0, 3.0) = " +
-                DecimalComparator.areEqualByThreeDecimalPlaces(3.0, 3.0));
-        System.out.println("DecimalComparator.areEqualbyThreeDecimalPlaces(-3.123, 3.123) = " +
-                DecimalComparator.areEqualByThreeDecimalPlaces(-3.123, 3.123));
-    }
-}
-```
-output
-```
-DecimalComparator.areEqualbyThreeDecimalPlaces(-3.1756, -3.175) = true
-DecimalComparator.areEqualbyThreeDecimalPlaces(-3.176, -3.175) = false
-DecimalComparator.areEqualbyThreeDecimalPlaces(3.0, 3.0) = true
-DecimalComparator.areEqualbyThreeDecimalPlaces(-3.123, 3.123) = false
-```
-
-----
-# Lec57p6CodingExercise6EqualSumChecker
-
-## Solution
-```java
-package com.company;
-
-public class EqualSumChecker {
-    public static boolean hasEqualSum(int num1, int num2, int num3){
-        return (num1 + num2) == num3;
-    }
-}
-```
-
-## Test Main
-
-```java
-package com.company;
-
-public class Main {
-
-    public static void main(String[] args) {
-        System.out.println("EqualSumChecker.hasEqualSum(1, 1, 1) = " + EqualSumChecker.hasEqualSum(1, 1, 1));
-        System.out.println("EqualSumChecker.hasEqualSum(1, 1, 2) = " + EqualSumChecker.hasEqualSum(1, 1, 2));
-        System.out.println("EqualSumChecker.hasEqualSum(1, -1, 0) = " + EqualSumChecker.hasEqualSum(1, -1, 0));
-    }
-}
-```
-output
-```
-EqualSumChecker.hasEqualSum(1, 1, 1) = false
-EqualSumChecker.hasEqualSum(1, 1, 2) = true
-EqualSumChecker.hasEqualSum(1, -1, 0) = true
-```
-
-----
-# Lec57p7CodingExercise7TeenNumberChecker
-
-## Solution
-```java
-package com.company;
-
-public class TeenNumberChecker {
-    public static boolean hasTeen(int p1, int p2, int p3){
-        return isTeen(p1) ||
-               isTeen(p2) ||
-               isTeen(p3);
-    }
-    public static boolean isTeen(int p1){
-        return (p1 >= 13 && p1 <= 19);
-    }
-}
-```
-
-## Test Main
-
-```java
-package com.company;
-
-public class Main {
-
-    public static void main(String[] args) {
-        System.out.println("TeenNumberChecker.hasTeen( 9,99,19) = " + TeenNumberChecker.hasTeen( 9,99,19));
-        System.out.println("TeenNumberChecker.hasTeen(25,15,42) = " + TeenNumberChecker.hasTeen(25,15,42));
-        System.out.println("TeenNumberChecker.hasTeen(22,23,24) = " + TeenNumberChecker.hasTeen(22,23,24));
-
-        System.out.println("TeenNumberChecker.isTeen( 9) = " + TeenNumberChecker.isTeen( 9));
-        System.out.println("TeenNumberChecker.isTeen(13) = " + TeenNumberChecker.isTeen(13));
-    }
-}
-```
-output
-```
-TeenNumberChecker.hasTeen( 9,99,19) = true
-TeenNumberChecker.hasTeen(25,15,42) = true
-TeenNumberChecker.hasTeen(22,23,24) = false
-TeenNumberChecker.isTeen( 9) = false
-TeenNumberChecker.isTeen(13) = true
 ```
 
 ----
