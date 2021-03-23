@@ -18,16 +18,20 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
+        printDayOfTheWeek(-1);
         // For loop for testing
         for(int i = 0; i <= 6; i++){
             printDayOfTheWeek(i);
         }
+        printDayOfTheWeek(7);
         // Spacer
         System.out.println("----");
+        printDayOfTheWeekIfElse(-1);
         // For loop for testing
         for(int i = 0; i <= 6; i++){
             printDayOfTheWeekIfElse(i);
         }
+        printDayOfTheWeek(7);
     }
 
     public static void printDayOfTheWeek(int day){
@@ -82,6 +86,7 @@ public class Main {
 ```
 Output
 ```
+Invalid day
 Sunday
 Monday
 Tuesday
@@ -89,7 +94,9 @@ Wednesday
 Thursday
 Friday
 Saturday
+Invalid day
 ----
+Invalid day
 Sunday
 Monday
 Tuesday
@@ -97,4 +104,8 @@ Wednesday
 Thursday
 Friday
 Saturday
+Invalid day
+
+Process finished with exit code 0
+
 ```
