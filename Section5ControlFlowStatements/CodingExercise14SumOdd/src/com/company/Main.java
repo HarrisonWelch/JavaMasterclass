@@ -3,7 +3,7 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-        // SumOdd
+        // CodingExercise14SumOdd
         System.out.println("sumOdd(  1,  100) = " + sumOdd(  1,  100));
         System.out.println("sumOdd( -1,  100) = " + sumOdd( -1,  100));
         System.out.println("sumOdd(100,  100) = " + sumOdd(100,  100));
