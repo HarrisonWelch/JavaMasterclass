@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Locale;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -30,6 +32,42 @@ public class Main {
         }
 
         // Mode code here
+
+        char c = 'C';
+
+        switch(c) {
+            case 'A':
+                System.out.println("c = A");
+                break;
+            case 'B':
+                System.out.println("c = B");
+                break;
+            case 'C':
+                System.out.println("c = C");
+                break;
+            case 'D':
+                System.out.println("c = D");
+                break;
+            case 'E':
+                System.out.println("c = E");
+                break;
+            default:
+                System.out.println("Not Found");
+                break;
+        }
+
+        String month = "January";
+        switch(month.toUpperCase()) {
+            case "JANUARY":
+                System.out.println("Jan");
+                break;
+            case "JUNE":
+                System.out.println("June");
+                break;
+            default:
+                System.out.println("Not Sure");
+        }
+
     }
 
 }
