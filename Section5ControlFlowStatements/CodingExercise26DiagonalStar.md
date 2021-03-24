@@ -1,0 +1,3 @@
+# CodingExercise26DiagonalStar
+
+## TODO
