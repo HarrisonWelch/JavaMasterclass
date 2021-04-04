@@ -3,7 +3,7 @@
 ## Similar thing as Lec 103
 * `readInteger()` - get the count of numbers for the array
 * `readElements()` - return an array of ints entered by user
-* `findMin()` - return the minimum int of an int array
+* `findMin()` - return the minimum int of an int
 
 ```java
 package com.company;
