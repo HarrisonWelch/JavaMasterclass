@@ -7004,3 +7004,2594 @@ public class Outlander extends Car{
 }
 ```
 ----
+# CodingExercise38Encapsulation
+
+Printer.java
+```java
+package com.company;
+
+public class Printer {
+    private int tonerLevel;
+    private int pagesPrinted;
+    private boolean duplex;
+
+    public Printer(int tonerLevel, boolean duplex) {
+        this.tonerLevel = (tonerLevel > -1 && tonerLevel <= 100) ? tonerLevel : -1;
+        this.duplex = duplex;
+        this.pagesPrinted = 0;
+    }
+
+    public int addToner(int tonerAmount) {
+        if (tonerAmount <= 0 || tonerAmount > 100)
+            return -1;
+        if ((this.tonerLevel + tonerAmount) > 100) {
+            return -1;
+        }
+        this.tonerLevel += tonerAmount;
+        return this.tonerLevel;
+    }
+
+    public int printPages(int pages) {
+        if (pages < 0) {
+            return -1;
+        }
+        int pagesToPrint = (this.duplex) ? (pages / 2) + (pages % 2) : pages;
+        this.pagesPrinted += pagesToPrint;
+        return pagesToPrint;
+    }
+
+    public int getPagesPrinted() {
+        return this.pagesPrinted;
+    }
+}
+```
+Main.java
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    // Write your code here
+        Printer printer = new Printer(50, true);
+        System.out.println(printer.addToner(50));
+        System.out.println("initial page count = " + printer.getPagesPrinted());
+        int pagesPrinted = printer.printPages(4);
+        System.out.println("Pages printed was " + pagesPrinted + " new total print count for printer = " + printer.getPagesPrinted());
+        pagesPrinted = printer.printPages(2);
+        System.out.println("Pages printed was " + pagesPrinted + " new total print count for printer = " + printer.getPagesPrinted());
+    }
+}
+```
+
+----
+# Coding Exercise 39 Polymorphism
+
+
+## Solution
+Main.java
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    // CodingExercise39Polymorphism
+
+        Car car = new Car(8, "Base car");
+        System.out.println(car.startEngine());
+        System.out.println(car.accelerate());
+        System.out.println(car.brake());
+
+        Mitsubishi mitsubishi = new Mitsubishi(6, "Outlander VRW 4WD");
+        System.out.println(mitsubishi.startEngine());
+        System.out.println(mitsubishi.accelerate());
+        System.out.println(mitsubishi.brake());
+
+        Ford ford = new Ford(6, "Ford Falcon");
+        System.out.println(ford.startEngine());
+        System.out.println(ford.accelerate());
+        System.out.println(ford.brake());
+
+        Holden holden = new Holden(6, "Holden Commodore");
+        System.out.println(holden.startEngine());
+        System.out.println(holden.accelerate());
+        System.out.println(holden.brake());
+    }
+}
+```
+Car.java
+```java
+package com.company;
+
+public class Car {
+    private boolean engine;
+    private int cylinders;
+    private String name;
+    private int wheels;
+
+    public Car(int cylinders, String name) {
+        this.cylinders = cylinders;
+        this.name = name;
+        this.wheels = 4;
+        this.engine = true;
+    }
+
+    public String startEngine() {
+        return getClass().getSimpleName() + " -> startEngine()";
+    }
+
+    public String accelerate() {
+        return getClass().getSimpleName() + " -> accelerate()";
+    }
+
+    public String brake() {
+        return getClass().getSimpleName() + " -> brake()";
+    }
+
+    public int getCylinders() {
+        return cylinders;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+```
+Mitsubishi.java
+```java
+package com.company;
+
+public class Mitsubishi extends Car {
+    public Mitsubishi(int cylinders, String name) {
+        super(cylinders, name);
+    }
+
+    @Override
+    public String startEngine() {
+        return getClass().getSimpleName() + " -> startEngine()";
+    }
+
+    @Override
+    public String accelerate() {
+        return getClass().getSimpleName() + " -> accelerate()";
+    }
+
+    @Override
+    public String brake() {
+        return getClass().getSimpleName() + " -> brake()";
+    }
+}
+```
+Holden.java
+```java
+package com.company;
+
+public class Holden extends Car {
+    public Holden(int cylinders, String name) {
+        super(cylinders, name);
+    }
+
+    @Override
+    public String startEngine() {
+        return getClass().getSimpleName() + " -> startEngine()";
+    }
+
+    @Override
+    public String accelerate() {
+        return getClass().getSimpleName() + " -> accelerate()";
+    }
+
+    @Override
+    public String brake() {
+        return getClass().getSimpleName() + " -> brake()";
+    }
+}
+```
+Ford.java
+```java
+package com.company;
+
+public class Ford extends Car {
+    public Ford(int cylinders, String name) {
+        super(cylinders, name);
+    }
+
+    @Override
+    public String startEngine() {
+        return getClass().getSimpleName() + " -> startEngine()";
+    }
+
+    @Override
+    public String accelerate() {
+        return getClass().getSimpleName() + " -> accelerate()";
+    }
+
+    @Override
+    public String brake() {
+        return getClass().getSimpleName() + " -> brake()";
+    }
+}
+```
+
+----
+# Coding Exercise 40 Bills Burgers
+
+## Solution
+
+Main.java
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    // write your code here
+        Hamburger hamburger = new Hamburger("Basic", "Sausage", 3.56, "White");
+        hamburger.addHamburgerAddition1("Tomato", 0.27);
+        hamburger.addHamburgerAddition2("Lettuce", 0.75);
+        hamburger.addHamburgerAddition3("Cheese", 1.13);
+        System.out.println("Total Burger price is " + hamburger.itemizeHamburger());
+
+        HealthyBurger healthyBurger = new HealthyBurger("Bacon", 5.67);
+        healthyBurger.addHamburgerAddition1("Egg", 5.43);
+        healthyBurger.addHealthyAddition1("Lentils", 3.41);
+        System.out.println("Total Healthy Burger price is " + healthyBurger.itemizeHamburger());
+
+        DeluxeBurger db = new DeluxeBurger();
+        db.addHamburgerAddition1("Should not do this", 50.53);
+        System.out.println("Total Deluxe Burger price is " + db.itemizeHamburger());
+
+    }
+}
+```
+Hamburger.java
+```java
+package com.company;
+
+public class Hamburger {
+    private String name;
+    private String meat;
+    private String breadRollType;
+    private double price;
+    private String addition1Name;
+    private double addition1Price;
+    private String addition2Name;
+    private double addition2Price;
+    private String addition3Name;
+    private double addition3Price;
+    private String addition4Name;
+    private double addition4Price;
+
+    public Hamburger(String name, String meat, double price, String breadRollType) {
+        this.name = name;
+        this.meat = meat;
+        this.breadRollType = breadRollType;
+        this.price = price;
+
+        System.out.println(
+                this.name + " hamburger on a " + this.breadRollType +
+                " roll with " + this.meat +
+                ", price is " + this.price
+        );
+    }
+
+    public void addHamburgerAddition1(String addition1Name, double addition1Price) {
+        this.addition1Name = addition1Name;
+        this.addition1Price = addition1Price;
+        System.out.println("Added " + this.addition1Name + " for an extra " + addition1Price);
+    }
+
+    public void addHamburgerAddition2(String addition2Name, double addition2Price) {
+        this.addition2Name = addition2Name;
+        this.addition2Price = addition2Price;
+        System.out.println("Added " + this.addition2Name + " for an extra " + addition2Price);
+    }
+
+    public void addHamburgerAddition3(String addition3Name, double addition3Price) {
+        this.addition3Name = addition3Name;
+        this.addition3Price = addition3Price;
+        System.out.println("Added " + this.addition3Name + " for an extra " + addition3Price);
+    }
+
+    public void addHamburgerAddition4(String addition4Name, double addition4Price) {
+        this.addition4Name = addition4Name;
+        this.addition4Price = addition4Price;
+        System.out.println("Added " + this.addition4Name + " for an extra " + addition4Price);
+    }
+
+    public double itemizeHamburger() {
+        return this.price + this.addition1Price +
+                this.addition2Price +
+                this.addition3Price +
+                this.addition4Price;
+    }
+}
+```
+DeluxeBurger.java
+```java
+package com.company;
+
+public class DeluxeBurger extends Hamburger {
+    public DeluxeBurger() {
+        super("Deluxe", "Sausage & Bacon", 19.10, "White");
+        super.addHamburgerAddition1("Chips", 0);
+        super.addHamburgerAddition2("Drink", 0);
+    }
+
+    @Override
+    public void addHamburgerAddition1(String addition1Name, double addition1Price) {
+        System.out.println("No additional items can be added to a deluxe burger.");
+    }
+
+    @Override
+    public void addHamburgerAddition2(String addition2Name, double addition2Price) {
+        System.out.println("No additional items can be added to a deluxe burger.");
+    }
+
+    @Override
+    public void addHamburgerAddition3(String addition3Name, double addition3Price) {
+        System.out.println("No additional items can be added to a deluxe burger.");
+    }
+
+    @Override
+    public void addHamburgerAddition4(String addition4Name, double addition4Price) {
+        System.out.println("No additional items can be added to a deluxe burger.");
+    }
+}
+```
+Healthy.java
+```java
+package com.company;
+
+public class HealthyBurger extends Hamburger {
+    private String healthyExtra1Name;
+    private double healthyExtra1Price;
+    private String healthyExtra2Name;
+    private double healthyExtra2Price;
+
+    public HealthyBurger(String meat, double price) {
+        super("Healthy", meat,  price, "Brown rye");
+    }
+
+    public void addHealthyAddition1(String healthyExtra1Name, double healthyExtra1Price) {
+        this.healthyExtra1Name = healthyExtra1Name;
+        this.healthyExtra1Price = healthyExtra1Price;
+        System.out.println("Added " + this.healthyExtra1Name + " for an extra " + healthyExtra1Price);
+    }
+
+    public void addHealthyAddition2(String healthyExtra2Name, double healthyExtra2Price) {
+        this.healthyExtra2Name = healthyExtra2Name;
+        this.healthyExtra2Price = healthyExtra2Price;
+        System.out.println("Added " + this.healthyExtra2Name + " for an extra " + healthyExtra2Price);
+    }
+
+    @Override
+    public double itemizeHamburger() {
+        return super.itemizeHamburger() +
+                healthyExtra1Price +
+                healthyExtra2Price;
+    }
+}
+```
+
+----
+# Introduction
+
+* Part 2 of the OOP of object oriented programming sections in this course
+
+## Topics
+* Composition
+* Polymorphism
+* Encapsulation
+
+----
+# Lec 91 Composition
+
+* Discussion about inheritance last time
+
+## Review Inheritance
+* `extends` allows one class to inherit properties off of another
+
+## Composition
+* Using an object instance (class) inside another class
+
+## Code
+Main.java
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    // write your code here
+        Dimensions dimensions = new Dimensions(20,20,5);
+        Case theCase = new Case("220B","Dell","240", dimensions);
+
+        // creating instance of class without a variable name-------------------------------v
+        Monitor theMonitor = new Monitor("27inch Beast", "Acer", 27, new Resolution(2540, 1440));
+
+        Motherboard theMotherboard = new Motherboard("BJ-200", "Asus", 4, 6, "v2.44");
+
+        PC thePC = new PC(theCase, theMonitor, theMotherboard); // Composition
+
+        // How do we access the composed objects? Such as drawPixel on the monitor?
+        thePC.getMonitor().drawPixelAt(1550, 1200, "red");
+
+        // Likewise with the mother board
+        thePC.getMotherboard().loadProgram("Windows 1.0");
+
+        // Likewise with the case
+        thePC.getTheCase().pressPowerButton();
+    }
+}
+```
+PC.java
+```java
+package com.company;
+
+public class PC {
+    private Case theCase; // case is reserved
+    private Monitor monitor;
+    private Motherboard motherboard;
+
+    public PC(Case theCase, Monitor monitor, Motherboard motherboard) {
+        this.theCase = theCase;
+        this.monitor = monitor;
+        this.motherboard = motherboard;
+    }
+
+    public Case getTheCase() {
+        return theCase;
+    }
+
+    public Monitor getMonitor() {
+        return monitor;
+    }
+
+    public Motherboard getMotherboard() {
+        return motherboard;
+    }
+}
+```
+Case.java
+```java
+package com.company;
+
+public class Case {
+    private String model;
+    private String manufacturer;
+    private String powerSupply;
+    private Dimensions dimensions; // Composition: object is part of another object
+
+    public Case(String model, String manufacturer, String powerSupply, Dimensions dimensions) {
+        this.model = model;
+        this.manufacturer = manufacturer;
+        this.powerSupply = powerSupply;
+        this.dimensions = dimensions;
+    }
+
+    public void pressPowerButton(){
+        System.out.println("Power button pressed");
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public String getPowerSupply() {
+        return powerSupply;
+    }
+
+    public Dimensions getDimensions() {
+        return dimensions;
+    }
+}
+```
+Dimensions.java
+```java
+package com.company;
+
+public class Dimensions {
+    private int width;
+    private int height;
+    private int depth;
+
+    public Dimensions(int width, int height, int depth) {
+        this.width = width;
+        this.height = height;
+        this.depth = depth;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+}
+```
+Monitor.java
+```java
+package com.company;
+
+public class Monitor {
+    private String model;
+    private String manufacturer;
+    private int size;
+    private Resolution nativeResolution;
+
+    public Monitor(String model, String manufacturer, int size, Resolution nativeResolution) {
+        this.model = model;
+        this.manufacturer = manufacturer;
+        this.size = size;
+        this.nativeResolution = nativeResolution;
+    }
+
+    public void drawPixelAt(int x, int y, String color) {
+        System.out.println("Drawing pixel at " + x + "," + y + " in color " + color);
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public Resolution getNativeResolution() {
+        return nativeResolution;
+    }
+}
+```
+Resolution.java
+```java
+package com.company;
+
+public class Resolution {
+    private int width;
+    private int height;
+
+    public Resolution(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+}
+```
+Motherboard.java
+```java
+package com.company;
+
+public class Motherboard {
+
+    private String model;
+    private String manufacturer;
+    private int ramSlots;
+    private int cardSlots;
+    private String bios; // name
+
+    public Motherboard(String model, String manufacturer, int ramSlots, int cardSlots, String bios) {
+        this.model = model;
+        this.manufacturer = manufacturer;
+        this.ramSlots = ramSlots;
+        this.cardSlots = cardSlots;
+        this.bios = bios;
+    }
+
+    public void loadProgram(String programName) {
+        System.out.println("Program " + programName + " is now loading...");
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public int getRamSlots() {
+        return ramSlots;
+    }
+
+    public int getCardSlots() {
+        return cardSlots;
+    }
+
+    public String getBios() {
+        return bios;
+    }
+}
+```
+
+----
+# Lec 92 Composition Part 2
+
+
+
+## Challenge
+* Create a single room of a house using composition
+* Think about the things that should be in the room
+* Some phyisical parts of the house but an object via a getter
+  * then add at least one method to hide the object completely
+  * Not using getter
+* access the object in the main class
+----
+# Lec 93 Encapsulation
+
+## Encapsulation
+* Data hiding
+* Prevent unhandled code change
+
+## Let's do it the wrong way with no data-hiding
+* public access
+* No Setter/Getter
+* Direct access in Main.java
+
+Player.java
+```java
+package com.company;
+
+public class Player {
+
+    public String fullName; // problem. Changing this name should only impact this internal class. Now Main is bugged. Leads to extended refactoring.
+    public int health;
+    public String weapon;
+
+    public void loseHealth(int damage){
+        this.health -= damage;
+        if (this.health <= 0) {
+            System.out.println("Player knocked out");
+            // Reduce number of lives remaining from player
+        }
+    }
+
+    public int healthRemaining() {
+        return this.health;
+    }
+}
+```
+Main.java
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    // Encapsulation
+        Player player = new Player();
+//        player.name = "Tim";
+        player.fullName = "Tim";
+        player.health = 20; // Problem. This may not have ANY value. ints start at 0, but could NPE if object.
+        player.weapon = "Sword";
+
+        int damage = 10;
+        player.loseHealth(damage);
+        System.out.println("Remaining health = " + player.healthRemaining());
+
+        damage = 11;
+        player.loseHealth(damage);
+        System.out.println("Remaining health = " + player.healthRemaining());
+
+        // See the possible problem?
+        // we have all our functionality/data-checks in lose health
+        // BUT we can just access the health field directly
+
+        player.health = 200;
+        player.health -= 10;
+        player.loseHealth(damage);
+        System.out.println("Remaining health = " + player.healthRemaining());
+
+        // This skips the checks (print outs)
+    }
+}
+```
+output
+```
+Remaining health = 10
+Player knocked out
+Remaining health = -1
+Remaining health = 179
+```
+
+## Now let's Redo it with proper *Encapsulation*
+* Private Access
+* Change internal variable names
+  * Refactoring IntelliJ tutorial
+
+EnhancedPlayer.java
+```java
+package com.company;
+
+public class EnhancedPlayer {
+    private String name;
+    private int hitPoints = 100; // Define default value
+    private String weapon;
+
+    public EnhancedPlayer(String name, int health, String weapon) {
+        this.name = name;
+        // Basic validation
+        if (health > 0 && health <= 100){
+            this.hitPoints = health;
+        }
+        this.weapon = weapon;
+    }
+
+    public void loseHealth(int damage){
+        this.hitPoints -= damage;
+        if (this.hitPoints <= 0) {
+            System.out.println("Player knocked out");
+            // Reduce number of lives remaining from player
+        }
+    }
+
+    public int getHealth() {
+        return hitPoints;
+    }
+}
+```
+Main.java
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // This skips the checks (print outs)
+        EnhancedPlayer player = new EnhancedPlayer("Tim", 200, "Sword"); // Setting health 200 will fail and keep default of 100.
+        System.out.println("Initial health is " + player.getHitPoints());
+
+    }
+}
+```
+
+----
+# Lec 94 Encapsulation Part 2 Challenge
+
+## Challenge
+* Create a class and demonstrate proper encapsulation techniques
+* the class will be called Printer
+* simulate a real Computer Printer
+* fields
+  * toner level
+  * number of pages printed
+  * is it a duplex printer (both sides)
+* methods
+  * fill up toner
+  * print page (inc page printed)
+* Decide scope, constructors, anything else
+
+Printer.java
+```java
+package com.company;
+
+public class Printer {
+    private int tonerLevel = 100;
+    private int pagesPrinted = 0;
+    private boolean isDuplex;
+
+    public Printer(boolean isDuplex) {
+        this.isDuplex = isDuplex;
+    }
+
+    public int fillUpToner(int tonerAmount) {
+        System.out.println("Filling up toner");
+//        tonerLevel = 100;
+        if(tonerAmount > 0 && tonerAmount <= 100) {
+            if (this.tonerLevel + tonerAmount > 100) {
+                return -1;
+            } else {
+                this.tonerLevel += tonerAmount;
+                return this.tonerLevel;
+            }
+        } else {
+            return -1;
+        }
+    }
+
+    public int printPage(boolean isDoubleSided, int numPages) {
+        System.out.println("Printing page");
+        if (!isDoubleSided) {
+            if (this.tonerLevel - 2 >= 0) {
+                this.pagesPrinted += numPages;
+                this.tonerLevel -= 2*numPages;
+            } else {
+                System.out.println("Not enough toner (" + this.tonerLevel + ") to print. Print failed.");
+                return -1;
+            }
+        } else {
+            if (this.tonerLevel - 4 >= 0) {
+                this.pagesPrinted += numPages;
+                this.tonerLevel -= 4*numPages;
+            } else {
+                System.out.println("Not enough toner (" + this.tonerLevel + ") to print. Print failed.");
+                return -1;
+            }
+        }
+        return numPages;
+    }
+
+    public int getTonerLevel() {
+        return tonerLevel;
+    }
+
+    public int getPagesPrinted() {
+        return pagesPrinted;
+    }
+}
+```
+Main.java
+
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    // write your code here
+        Printer printer = new Printer(true);
+
+        System.out.println("Initial page count = " + printer.getPagesPrinted());
+        int pagesPrinted = printer.printPage(true, 4);
+        System.out.println("Pages printed was " + pagesPrinted + " new total print count for printer = " + printer.getPagesPrinted());
+
+    }
+}
+```
+----
+# Lec 95 Polymorphism
+
+## Polymorphism
+* Usually refrenced when using a single parent class or interface to implement multiple other classes
+  * A split in the inheritance tree
+* Allows actions to act differently based on what the action is being performed on
+* Best to show an example
+  * Create many classes in the main
+  * Class that aren't going to be reused
+
+Main.java (all in one file)
+```java
+package com.company;
+
+class Movie {
+    private String name;
+
+    public Movie(String name) {
+        this.name = name;
+    }
+
+    public String plot() {
+        // What the movie is about
+        return "No plot here";
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+class Jaws extends Movie {
+    public Jaws() {
+        super("Jaws"); // Using inheritance we are initializing name to "Jaws"
+    }
+
+    @Override
+    public String plot() {
+        return "A shark eats lots of people";
+    }
+}
+
+class IndependenceDay extends Movie {
+    public IndependenceDay() {
+        super("Independence Day");
+    }
+
+    @Override
+    public String plot() {
+        return "Aliens attempt to take over planet Earth";
+    }
+}
+
+class MazeRunner extends Movie {
+    public MazeRunner() {
+        super("Maze Runner");
+    }
+
+    @Override
+    public String plot() {
+        return "Kids try and escape a maze";
+    }
+}
+
+class StarWars extends Movie {
+    public StarWars() {
+        super("Star Wars");
+    }
+
+    @Override
+    public String plot() {
+        return "Imperial Forces try to take over the universe";
+    }
+}
+
+class Forgetable extends Movie {
+    public Forgetable() {
+        super("Forgetable");
+    }
+
+    // No plot method (Show how polymorphism works)
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+	    // Lec95Polymorphism
+        for (int i = 1; i < 11; i++) {
+            Movie movie = randomMovie();
+            System.out.println("Movie #" + i +
+                        " : " + movie.getName() + "\n" +
+                        "Plot: " + movie.plot() + "\n"); // return the soonest available plot method results
+        }
+    }
+
+    // Notice returning "Movie"
+    public static Movie randomMovie() {
+        int randomNumber = (int) (Math.random() * 5) + 1;
+        System.out.println("Random number generated was " + randomNumber); // check
+        switch (randomNumber){
+            case 1:
+                return new Jaws();
+            case 2:
+                return new IndependenceDay();
+            case 3:
+                return new MazeRunner();
+            case 4:
+                return new StarWars();
+            case 5:
+                return new Forgetable();
+        }
+        return null; // switch could be diff numbers
+    }
+}
+
+```
+----
+# Lec 96 Polymorphism Part 2 Challenge
+
+## Challenge
+* Back to the car analogy
+* Create a base class called car
+* It should have a few fields that would e appropriate for a generic car class
+  * engine
+  * cylinders
+  * wheels
+  * etc.
+* Constructor
+  * name of car
+  * wheels to 4
+  * engine to true
+  * Cyclinders and names passed as parameters
+* Create getters
+* Create methods startEngine, accelerate, and brake
+  * Show a message for each base class
+* Now create 3 sub-classes for your favorite vehicles.
+* Override appropriate methods to demonstrate polymorphism in use.
+* Put all classes in the one jave file (this one)
+
+## Solution
+* All in one file
+```java
+package com.company;
+
+class Car {
+    private boolean engine;
+    private int cylinders;
+    private int wheels;
+    private String name;
+
+    public Car(int cylinders, String name) {
+        this.cylinders = cylinders;
+        this.name = name;
+        this.wheels = 4; // default
+        this.engine = true;
+    }
+
+    public boolean isEngine() {
+        return engine;
+    }
+
+    public int getCylinders() {
+        return cylinders;
+    }
+
+    public int getWheels() {
+        return wheels;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String startEngine() {
+        return "Car -> startEngine()";
+    }
+
+    public String accelerate() {
+        return "Car -> accelerate()";
+    }
+
+    public String brake() {
+        return "Car -> brake()";
+    }
+
+}
+
+class Mitsubishi extends Car {
+    public Mitsubishi(int cylinders, String name) {
+        super(cylinders, name);
+    }
+
+    @Override
+    public String startEngine() {
+        return "Mitsubishi -> startEngine()";
+    }
+
+    @Override
+    public String accelerate() {
+        return "Mitsubishi -> accelerate()";
+    }
+
+    @Override
+    public String brake() {
+        return "Mitsubishi -> brake()";
+    }
+}
+
+class Ford extends Car {
+    public Ford(int cylinders, String name) {
+        super(cylinders, name);
+    }
+
+    @Override
+    public String startEngine() {
+        return "Ford -> startEngine()";
+    }
+
+    @Override
+    public String accelerate() {
+        return "Ford -> accelerate()";
+    }
+
+    @Override
+    public String brake() {
+        return "Ford -> brake()";
+    }
+}
+
+class Holden extends Car {
+    public Holden(int cylinders, String name) {
+        super(cylinders, name);
+    }
+
+    @Override
+    public String startEngine() {
+        return "Holden -> startEngine()";
+    }
+
+    @Override
+    public String accelerate() {
+        return "Holden -> accelerate()";
+    }
+
+    @Override
+    public String brake() {
+        return "Holden -> brake()";
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+	    // Write your code here
+
+        Car car = new Car(8, "Base car");
+        System.out.println(car.startEngine());
+        System.out.println(car.accelerate());
+        System.out.println(car.brake());
+
+        Mitsubishi mitsubishi = new Mitsubishi(6, "Outlander VRW 4WD");
+        System.out.println(mitsubishi.startEngine());
+        System.out.println(mitsubishi.accelerate());
+        System.out.println(mitsubishi.brake());
+
+        Ford ford = new Ford(6, "Ford Falcon");
+        System.out.println(ford.startEngine());
+        System.out.println(ford.accelerate());
+        System.out.println(ford.brake());
+
+        Holden holden = new Holden(6, "Holden Commodore");
+        System.out.println(holden.startEngine());
+        System.out.println(holden.accelerate());
+        System.out.println(holden.brake());
+    }
+}
+```
+
+
+
+
+----
+# Lec 97 OOP Master Challenge
+
+## Challenge
+* The purpose of the application is to help a fictitious company called Bills Burgers to manage their process of selling hamburgers. 
+* Our application will help Bill to select types of burgers, some af the additional items (additions) to be added to the burgers and pricing. 
+* We want to create a base hamburger, but also two other types of hamburgers that are popular ones in Bills store. 
+* The basic hamburger should have the following items. 
+* Bread roll type, meat and up to 4 additional additions (things like lettuce, tomato, carrot) that the customer can select to be added to the burger. 
+* Each one of these items gets charged an additional price so you need soæ way to track how nany items got added and to calculate the final price (base burger with all the additions). 
+* This burger has a base price and the additions are alt separately priced (up to 4 additions, see above). 
+* Create a Hamburger class to deal with all the above. 
+* The constructor should only include the roll type, meat and price, can also include name of burger or you can use a setter. 
+* Also create two extra varieties of Hamburgers (subclasses) to cater for 
+* a) Healthy burger (on a brown rye bread roll), plus two addition items that can be added. 
+  * The healthy burger can have 6 items' (Additions) in total. 
+  * hint: youl probably want to process the two additional items in this new class (subclass of Hamburger), not the base class (Hamburger), since the additions are only appropriate for this new class (in other words new burger type). 
+* b) Deluxe hamburger — comes with chips and drinks as additions, but no extra additions are allowed. 
+  * hint: You have to find a way to automatically add these new additions at the time the deluxe burger object is created, and then prevent other additions being made. 
+* All 3 classes should have a method that can be catted anytime to shov the base price of the hamburger 
+* plus alt each showing the addition name, and addition price, and a grand/finat total for the burger (base price + at t additions) 
+* For the two additional classes this nay require you to be looking at the base class for pricing and then adding totals to final price. 
+
+## My Solution
+
+Main.java
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    // Write your code here
+        Hamburger hamburger = new Hamburger("Wheat", "Sausage", 2.50, "Burger");
+        System.out.println("hamburger.getPrice() = " + hamburger.getPrice());
+        hamburger.addItem("onion");
+        System.out.println("hamburger.getPrice() = " + hamburger.getPrice());
+        hamburger.addItem("mustard");
+        System.out.println("hamburger.getPrice() = " + hamburger.getPrice());
+        hamburger.addItem("onion");
+        System.out.println("hamburger.getPrice() = " + hamburger.getPrice());
+        hamburger.addItem("pickle");
+        System.out.println("hamburger.getPrice() = " + hamburger.getPrice());
+        hamburger.addItem("ketchup");
+        System.out.println("hamburger.getPrice() = " + hamburger.getPrice());
+        hamburger.addItem("tomato");
+        System.out.println("hamburger.getPrice() = " + hamburger.getPrice());
+        System.out.println("----");
+        HealthyBurger healthyBurger = new HealthyBurger("Chicken", 1.85);
+        System.out.println("healthyBurger.getPrice() = " + healthyBurger.getPrice());
+        healthyBurger.addItem("onion");
+        System.out.println("healthyBurger.getPrice() = " + healthyBurger.getPrice());
+        healthyBurger.addItem("mustard");
+        System.out.println("healthyBurger.getPrice() = " + healthyBurger.getPrice());
+        healthyBurger.addItem("onion");
+        System.out.println("healthyBurger.getPrice() = " + healthyBurger.getPrice());
+        healthyBurger.addItem("pickle");
+        System.out.println("healthyBurger.getPrice() = " + healthyBurger.getPrice());
+        System.out.println("----");
+        DeluxeBurger deluxeBurger = new DeluxeBurger("White","Sausage & Bacon", 5.65);
+        System.out.println("deluxeBurger.getPrice() = " + deluxeBurger.getPrice());
+        deluxeBurger.addItem("onion");
+        System.out.println("deluxeBurger.getPrice() = " + deluxeBurger.getPrice());
+        deluxeBurger.addItem("mustard");
+        System.out.println("deluxeBurger.getPrice() = " + deluxeBurger.getPrice());
+        deluxeBurger.addItem("onion");
+        System.out.println("deluxeBurger.getPrice() = " + deluxeBurger.getPrice());
+        deluxeBurger.addItem("pickle");
+        System.out.println("deluxeBurger.getPrice() = " + deluxeBurger.getPrice());
+        deluxeBurger.addItem("BBQ sauce");
+        System.out.println("deluxeBurger.getPrice() = " + deluxeBurger.getPrice());
+        deluxeBurger.addItem("Tomato");
+        System.out.println("deluxeBurger.getPrice() = " + deluxeBurger.getPrice());
+        deluxeBurger.addItem("LETTUCE");
+        System.out.println("deluxeBurger.getPrice() = " + deluxeBurger.getPrice());
+        deluxeBurger.addItem("bacon");
+        System.out.println("deluxeBurger.getPrice() = " + deluxeBurger.getPrice());
+    }
+}
+```
+Hamburger.java
+```java
+package com.company;
+
+public class Hamburger {
+    public static final double PRICE_PER_ADDITION = 0.50d;
+    private static final int MAX_ITEMS = 4;
+    private String rollType;
+    private String meatType;
+    private boolean hasLettuce;
+    private boolean hasTomato;
+    private boolean hasPickle;
+    private boolean hasMustard;
+    private boolean hasKetchup;
+    private boolean hasBacon;
+    private boolean hasMayo;
+    private boolean hasBBQSauce;
+    private boolean hasOnion;
+    private int itemsAdded;
+    private double price;
+    private double basePrice;
+    private String name;
+
+    public Hamburger(String rollType, String meatType, double price, String name) {
+        this.rollType = rollType;
+        this.meatType = meatType;
+        this.basePrice = price;
+        this.price = price;
+        this.name = name;
+    }
+
+    private boolean isMaxItems(int maxItems){
+        return itemsAdded >= maxItems;
+    }
+
+    public void addItem(String itemName) {
+        this.addItemWithMax(itemName, Hamburger.MAX_ITEMS);
+    }
+
+    protected void addItemWithMax(String itemName, int maxItems) {
+        itemName = itemName.toUpperCase();
+        if (isMaxItems(maxItems)) {
+            System.out.println("Burger already has max items");
+            return;
+        }
+        switch(itemName) {
+            case "LETTUCE":
+                if (hasLettuce) {
+                    System.out.println("Burger already has lettuce");
+                    return;
+                }
+                this.hasLettuce = true;
+                break;
+            case "TOMATO":
+                if (hasTomato) {
+                    System.out.println("Burger already has lettuce");
+                    return;
+                }
+                this.hasTomato = true;
+                break;
+            case "PICKLE":
+                if (hasPickle) {
+                    System.out.println("Burger already has pickle");
+                    return;
+                }
+                this.hasPickle = true;
+                break;
+            case "MUSTARD":
+                if (hasMustard) {
+                    System.out.println("Burger already has mustard");
+                    return;
+                }
+                this.hasMustard = true;
+                break;
+            case "KETCHUP":
+                if (hasKetchup) {
+                    System.out.println("Burger already has ketchup");
+                    return;
+                }
+                this.hasKetchup = true;
+                break;
+            case "BACON":
+                if (hasBacon) {
+                    System.out.println("Burger already has bacon");
+                    return;
+                }
+                this.hasBacon = true;
+                break;
+            case "MAYO":
+                if (hasMayo) {
+                    System.out.println("Burger already has mayo");
+                    return;
+                }
+                this.hasMayo = true;
+                break;
+            case "BBQSAUCE":
+            case "BBQ SAUCE":
+            case "BBQ_SAUCE":
+                if (hasBBQSauce) {
+                    System.out.println("Burger already has BBQ sauce");
+                    return;
+                }
+                this.hasBBQSauce = true;
+                break;
+            case "ONION":
+                if (hasOnion) {
+                    System.out.println("Burger already has onion");
+                    return;
+                }
+                this.hasOnion = true;
+                break;
+            default:
+                System.out.println("UNRECOGNIZED ITEM. NOT ADDING ITEM " + itemName + " TO BURGER.");
+        }
+        this.itemsAdded++;
+        this.calculatePrice();
+    }
+
+    public void removeItem(String itemName) {
+        itemName = itemName.toUpperCase();
+        switch(itemName) {
+            case "LETTUCE":
+                if (!hasLettuce) {
+                    System.out.println("Burger does not have lettuce");
+                    return;
+                }
+                this.hasLettuce = true;
+                break;
+            case "TOMATO":
+                if (!hasTomato) {
+                    System.out.println("Burger does not have lettuce");
+                    return;
+                }
+                this.hasTomato = true;
+                break;
+            case "PICKLE":
+                if (!hasPickle) {
+                    System.out.println("Burger does not have pickle");
+                    return;
+                }
+                this.hasPickle = true;
+                break;
+            case "MUSTARD":
+                if (!hasMustard) {
+                    System.out.println("Burger does not have mustard");
+                    return;
+                }
+                this.hasMustard = true;
+                break;
+            case "KETCHUP":
+                if (!hasKetchup) {
+                    System.out.println("Burger does not have ketchup");
+                    return;
+                }
+                this.hasKetchup = true;
+                break;
+            case "BACON":
+                if (!hasBacon) {
+                    System.out.println("Burger does not have bacon");
+                    return;
+                }
+                this.hasBacon = true;
+                break;
+            case "MAYO":
+                if (!hasMayo) {
+                    System.out.println("Burger does not have mayo");
+                    return;
+                }
+                this.hasMayo = true;
+                break;
+            case "BBQSAUCE":
+            case "BBQ SAUCE":
+            case "BBQ_SAUCE":
+                if (!hasBBQSauce) {
+                    System.out.println("Burger does not have BBQ sauce");
+                    return;
+                }
+                this.hasBBQSauce = true;
+                break;
+            case "ONION":
+                if (!hasOnion) {
+                    System.out.println("Burger does not have onion");
+                    return;
+                }
+                this.hasOnion = true;
+                break;
+            default:
+                System.out.println("UNRECOGNIZED ITEM. NOT REMOVING ITEM " + itemName + " TO BURGER.");
+                return;
+        }
+        this.itemsAdded--;
+        this.calculatePrice();
+    }
+
+    private void calculatePrice(){
+        this.price = basePrice + (itemsAdded * PRICE_PER_ADDITION);
+    }
+
+    public String getRollType() {
+        return rollType;
+    }
+
+    public String getMeatType() {
+        return meatType;
+    }
+
+    public boolean hasLettuce() {
+        return hasLettuce;
+    }
+
+    public boolean hasTomato() {
+        return hasTomato;
+    }
+
+    public boolean hasPickle() {
+        return hasPickle;
+    }
+
+    public boolean hasMustard() {
+        return hasMustard;
+    }
+
+    public boolean hasKetchup() {
+        return hasKetchup;
+    }
+
+    public boolean hasBacon() {
+        return hasBacon;
+    }
+
+    public boolean hasMayo() {
+        return hasMayo;
+    }
+
+    public boolean hasBBQSauce() {
+        return hasBBQSauce;
+    }
+
+    public boolean hasOnion() {
+        return hasOnion;
+    }
+
+    public int getItemsAdded() {
+        return itemsAdded;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+```
+HealthyBurger.java
+```java
+package com.company;
+
+public class HealthyBurger extends Hamburger {
+    public static final int MAX_ITEMS = 2;
+    public HealthyBurger(String meatType, double price) {
+        super("Brown Rye", meatType, price, "Healthy");
+    }
+
+    @Override
+    public void addItem(String itemName) {
+        super.addItemWithMax(itemName, HealthyBurger.MAX_ITEMS);
+    }
+}
+```
+DeluxeBurger.java
+```java
+package com.company;
+
+public class DeluxeBurger extends Hamburger {
+    public static final int MAX_ITEMS = 6;
+    private boolean hasDrink;
+    private boolean hasChips;
+    public DeluxeBurger(String rollType, String meatType, double price) {
+        super(rollType, meatType, price, "Deluxe");
+        this.hasDrink = true;
+        this.hasChips = true;
+    }
+
+    @Override
+    public void addItem(String itemName) {
+        super.addItemWithMax(itemName, DeluxeBurger.MAX_ITEMS);
+    }
+}
+```
+output
+```
+hamburger.getPrice() = 2.5
+hamburger.getPrice() = 3.0
+hamburger.getPrice() = 3.5
+Burger already has onion
+hamburger.getPrice() = 3.5
+hamburger.getPrice() = 4.0
+hamburger.getPrice() = 4.5
+Burger already has max items
+hamburger.getPrice() = 4.5
+----
+healthyBurger.getPrice() = 1.85
+healthyBurger.getPrice() = 2.35
+healthyBurger.getPrice() = 2.85
+Burger already has max items
+healthyBurger.getPrice() = 2.85
+Burger already has max items
+healthyBurger.getPrice() = 2.85
+----
+deluxeBurger.getPrice() = 5.65
+deluxeBurger.getPrice() = 6.15
+deluxeBurger.getPrice() = 6.65
+Burger already has onion
+deluxeBurger.getPrice() = 6.65
+deluxeBurger.getPrice() = 7.15
+deluxeBurger.getPrice() = 7.65
+deluxeBurger.getPrice() = 8.15
+deluxeBurger.getPrice() = 8.65
+Burger already has max items
+deluxeBurger.getPrice() = 8.65
+
+Process finished with exit code 0
+```
+----
+# Lec 98 OOP Master Challenge Part 2
+
+Continuing with the subclasses of Lec 97
+* Also create two extra varieties of Hamburgers (subclasses) to cater for 
+* a) Healthy burger (on a brown rye bread roll), plus two addition items that can be added. 
+  * The healthy burger can have 6 items' (Additions) in total. 
+  * hint: youl probably want to process the two additional items in this new class (subclass of Hamburger), not the base class (Hamburger), since the additions are only appropriate for this new class (in other words new burger type). 
+* b) Deluxe hamburger — comes with chips and drinks as additions, but no extra additions are allowed. 
+  * hint: You have to find a way to automatically add these new additions at the time the deluxe burger object is created, and then prevent other additions being made. 
+* All 3 classes should have a method that can be catted anytime to shov the base price of the hamburger 
+* plus alt each showing the addition name, and addition price, and a grand/finat total for the burger (base price + at t additions) 
+* For the two additional classes this nay require you to be looking at the base class for pricing and then adding totals to final price. 
+
+----
+# Coding Exercise 41 Sorted Array
+
+## Challenge
+* Same as Lec92
+* Methods:
+  * getIntegers - returns array of entered ints
+  * printArray - prints out of the contents of the array
+  * sortIntegers - sort array and return
+    * figure out how to copy them into a new array
+
+## Solution
+
+```java
+import java.util.Scanner;
+
+public class SortedArray {
+    // write code here
+
+    public static int[] getIntegers(int number) {
+        System.out.println("Enter numbers:\r");
+        Scanner scanner = new Scanner(System.in);
+        int[] arr = new int[number];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        return arr;
+    }
+
+    public static void printArray(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println("Element " + i + " contents " + arr[i]);
+        }
+    }
+
+    public static int[] sortIntegers(int[] arr) {
+        int[] arrSorted = new int[arr.length];
+        int greatest = Integer.MIN_VALUE;
+        int greatest_index = -1;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length; j++) {
+                if (arr[j] > greatest) {
+                    greatest = arr[j];
+                    greatest_index = j;
+                }
+            }
+            arrSorted[i] = greatest;
+            arr[greatest_index] = Integer.MIN_VALUE;
+            greatest = Integer.MIN_VALUE;
+        }
+        return arrSorted;
+    }
+}
+```
+output
+```
+Enter numbers:
+1
+2
+3
+4
+5
+Element 0 contents 5
+Element 1 contents 4
+Element 2 contents 3
+Element 3 contents 2
+Element 4 contents 1
+```
+----
+# Coding Exercise 42 Minimum Element
+
+## Similar thing as Lec 103
+* `readInteger()` - get the count of numbers for the array
+* `readElements()` - return an array of ints entered by user
+* `findMin()` - return the minimum int of an int
+
+```java
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    // Write your code here
+        System.out.println(findMin(readElements(readInteger())));
+    }
+
+    private static int readInteger(){
+        Scanner scanner = new Scanner(System.in);
+        int x = scanner.nextInt();
+        scanner.nextLine();
+        return x;
+    }
+
+    private static int[] readElements(int count){
+        Scanner scanner = new Scanner(System.in);
+        int[] arr = new int[count];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        return arr;
+    }
+
+    private static int findMin(int[] arr){
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < min) {
+                min = arr[i];
+            }
+        }
+        return min;
+    }
+}
+```
+output
+```
+5
+1
+-2
+3
+-5
+9
+-5
+```
+----
+# CodingExercise43ReverseArray
+
+## Solution
+
+```java
+package com.company;
+
+import java.util.Arrays;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    // write your code here
+        int[] arr = {1,2,3,4,5};
+        reverse(arr);
+//        System.out.println(Arrays.toString(arr));
+    }
+    private static void reverse(int[] arr){
+        System.out.println("Array = " + Arrays.toString(arr));
+        int swap = 0;
+        for (int i = 0; i < arr.length/2; i++) {
+            swap = arr[i];
+            arr[i] = arr[arr.length-i-1];
+            arr[arr.length-i-1] = swap;
+        }
+        System.out.println("Reversed array = " + Arrays.toString(arr));
+    }
+}
+
+```
+----
+# Lec 92 Arrays Challenge
+
+## Challenge
+* Create a program using arrays that sorts a list of ints in desc order
+  * high low
+* Read ints from keyboard
+* Methods:
+  * getIntegers - returns array of entered ints
+  * printArray - prints out of the contents of the array
+  * sortIntegers - sort array and return
+    * figure out how to copy them into a new array
+
+## Solution
+Main.java
+```java
+package com.company;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+    public static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+	    // Arrays Challenge
+        int[] arr = getIntegers(5);
+        printArray(arr);
+        arr = sortIntegers(arr);
+        printArray(arr);
+    }
+
+    public static int[] getIntegers(int number) {
+        System.out.println("Enter numbers:\r");
+        int[] arr = new int[number];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        return arr;
+    }
+
+    public static void printArray(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println("Element " + i + " = " + arr[i]);
+        }
+    }
+
+    public static int[] sortIntegers(int[] arr) {
+        int[] arrSorted = new int[arr.length];
+        int greatest = Integer.MIN_VALUE;
+        int greatest_index = -1;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length; j++) {
+                if (arr[j] > greatest) {
+                    greatest = arr[j];
+                    greatest_index = j;
+                }
+            }
+            arrSorted[i] = greatest;
+            arr[greatest_index] = Integer.MIN_VALUE;
+            greatest = Integer.MIN_VALUE;
+        }
+        return arrSorted;
+    }
+}
+```
+output
+```
+Enter numbers:
+1
+2
+3
+4
+5
+Element 0 = 1
+Element 1 = 2
+Element 2 = 3
+Element 3 = 4
+Element 4 = 5
+Element 0 = 5
+Element 1 = 4
+Element 2 = 3
+Element 3 = 2
+Element 4 = 1
+```
+
+----
+# Lec 101 Arrays Recap
+
+## Arrays
+* Store multiple values of the same type in a single variable
+* default values of numeric array elements are zero
+* Zero indexed
+  * Array of n elements goes from 0 to n-1 indexes
+  * Array of 10 elements goes from 0 to 9 indexes
+* Try to access an index out side of the range of an array and you will get an "ArrayIndexOutOfBoundsException"
+* `[]` is the array access operator
+  * Example `arr[i]`
+
+## Example
+```java
+int[] array = new int[5];
+```
+* contains elemetns array[0] to array[4]
+* 5 elements
+* new keyword creates a new object and initalize to default value
+* boolean is init to false
+* String is set to null
+
+## Example 2
+```java
+int[] array = {5,4,3,2,1};
+```
+* Inline initialization
+* 5 elements 0 to 4
+* Array initialized to 5,4,3,2,1
+* Known as an anonymous array
+
+## Common errors
+```java
+int[] array = {5,4,3,2,1};
+int[5] = 0;
+```
+* the 5 index is the 6th element
+* Throws `ArrayIndexOutOfBoundsException`
+
+## Common errors 2
+```java
+int[] array = {5,4,3,2,1};
+for (int i = 1; i < array.length; i++) {
+    System.out.println("Element " + i + " = " + arr[i]);
+}
+```
+* starting at 1 and not 0
+* Won't use the 1st element at index 0
+
+## Common errors 3
+```java
+int[] array = {5,4,3,2,1};
+for (int i = 1; i <= array.length; i++) {
+    System.out.println("Element " + i + " = " + arr[i]);
+}
+```
+* Throws `ArrayIndexOutOfBoundsException`
+* condition `<=` should be `<`
+* This will allow element 5 to be accessed which does not exist.
+
+
+----
+# Refrence Types Vs Value Types
+
+## Code
+* The `new` creates a new instance
+* This binds a reference to the variable name
+* Assigning this reference opens up the ability to modify the original object
+  * Can also open up the ability to incorrectly modify to variables
+
+```java
+package com.company;
+
+import java.util.Arrays;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    // Lec102ReferenceTypesVsValueTypes
+        int myIntValue = 10;
+        int anotherIntValue = myIntValue;
+        System.out.println("myIntValue = " + myIntValue); // 10
+        System.out.println("anotherIntValue = " + anotherIntValue); // 10
+        anotherIntValue++;
+        System.out.println("myIntValue = " + myIntValue); // 10
+        System.out.println("anotherIntValue = " + anotherIntValue); // 11
+
+        // Arrays are reference types
+        // Holds the reference/address to the object but not to the object itself
+        int[] myIntArray = new int[5]; // Array with 5 elements init to zero
+        int[] anotherArray = myIntArray; // These point at the same addr.
+
+        System.out.println("myIntArray = " + Arrays.toString(myIntArray)); // [0, 0, 0, 0, 0]
+        System.out.println("anotherArray = " + Arrays.toString(anotherArray)); // [0, 0, 0, 0, 0]
+
+        anotherArray[0] = 1;
+
+        System.out.println("after change myIntArray = " + Arrays.toString(myIntArray)); // [1, 0, 0, 0, 0]
+        System.out.println("after change anotherArray = " + Arrays.toString(anotherArray)); // [1, 0, 0, 0, 0]
+        // Note "anotherArray[0] = 1;" changed BOTH arrays. B/c they reference the same object.
+
+        modifyArray(myIntArray);
+
+        System.out.println("after modify myIntArray = " + Arrays.toString(myIntArray)); // [2, 0, 0, 0, 0]
+        System.out.println("after modify anotherArray = " + Arrays.toString(anotherArray)); // [2, 0, 0, 0, 0]
+
+        anotherArray = new int[] {4,5,6,7,8};
+
+        System.out.println("after dereference myIntArray = " + Arrays.toString(myIntArray)); // [2, 0, 0, 0, 0]
+        System.out.println("after dereference anotherArray = " + Arrays.toString(anotherArray)); // [4, 5, 6, 7, 8]
+
+    }
+
+    private static void modifyArray(int[] array) {
+        array[0] = 2; // simple
+        array = new int[] {1,2,3,4,5}; // will not affect the main method stuff
+        // b/c a new ref was made
+    }
+}
+```
+
+----
+# Lec 103 Minimum Element Challenge
+
+* Return the lowest element in an int[] array.
+* Method
+  * readIntegers() - read user input an put in array to return
+  * findMin() - return min of array. Number of elements is `count`
+* In main read the count parameter
+* Then call find min
+* Print min element
+
+## My solution
+```java
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+	    // Write your code here
+        System.out.println("Enter how many numbers you want to enter:\r");
+        int count = scanner.nextInt();
+        int[] arr = readIntegers(count);
+        System.out.println("The minimum is " + findMin(arr));
+    }
+
+    public static int[] readIntegers(int count) {
+        System.out.println("Enter numbers:\r");
+        int[] arr = new int[count];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        return arr;
+    }
+
+    public static int findMin(int[] arr) {
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < min) {
+                min = arr[i];
+            }
+        }
+        return min;
+    }
+}
+```
+
+
+----
+# Lec 104 Reverse Array Challenge
+
+## Challenge
+* reverse array
+* Use referencing
+
+## My solution
+
+```java
+package com.company;
+
+import java.util.Arrays;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    // Lec 104 Reverse Array Challenge
+//        int[] arr = new int[] {1,2,3,4,5};
+//        int[] arr = new int[] {1,2,3,4,5,6,7,8};
+        int[] arr = new int[] {-1, 7, 98, 21, -45, 42, 68, 0};
+        System.out.println(Arrays.toString(arr)); // Forwards
+        reverseArray(arr);
+        System.out.println(Arrays.toString(arr)); // Backwards
+    }
+
+    public static void reverseArray(int[] arr){
+        int swap = 0;
+        for (int i = 0; i < arr.length / 2; i++) {
+            swap = arr[i];
+            arr[i] = arr[arr.length-i-1];
+            arr[arr.length-i-1] = swap;
+        }
+    }
+}
+
+```
+output
+```
+[-1, 7, 98, 21, -45, 42, 68, 0]
+[0, 68, 42, -45, 21, 98, 7, -1]
+```
+
+----
+# Lec 105 List And Array List Part 1
+
+## Why switch to ArrayList from normal arrays?
+* Dynamic sizing
+* Self-documenting add/remove
+* Abstract away any array resizing
+* You could resize an array yourself, but that be
+  * Too much work
+  * Too much copy/paste
+  * This work has been done for you
+
+## Resize an array the "old-fashioned" way (DONT DO THIS)
+Main.java
+```java
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    private static int[] baseData = new int[10];
+    private static Scanner s = new Scanner(System.in);
+
+    public static void main(String[] args) {
+	    // write your code here
+        System.out.println("Enter 10 integers:");
+        getInput();
+        printArray(baseData);
+        resizeArray();
+        System.out.println("Enter 12 integers:");
+        getInput();
+        printArray(baseData);
+    }
+
+    private static void getInput() {
+        for (int i = 0; i < baseData.length; i++) {
+            baseData[i] = s.nextInt();
+        }
+    }
+
+    private static void printArray(int[] arr) {
+        for(int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    private static void resizeArray() {
+        int[] original = baseData;
+        baseData = new int[original.length+2];
+        for(int i = 0; i < original.length; i++) {
+            baseData[i] = original[i];
+        }
+    }
+}
+```
+
+## List
+* Interface implemented by ArrayList
+* Implemented by ArrayList
+
+## ArrayList
+* Uses Generic E so it can take on any one type
+* Dynamic sizing
+
+## Example Grocery List class
+```java
+package com.company;
+
+import java.util.ArrayList;
+
+public class GroceryList {
+    private int[] myNumbers = new int[50];
+
+    private ArrayList<String> groceryList = new ArrayList<>();
+
+    public void addGroceryItem(String item) {
+        groceryList.add(item); // Automatically add an item to the list
+        // Where it goes is "abstracted". Java takes care of this while you focus on the application.
+    }
+
+    public void printGroceryList() {
+        System.out.println("You have " + groceryList.size() + " items in the grocery list.");
+        for (int i = 0; i < groceryList.size(); i++) {
+            System.out.println((i+1) + "." + groceryList.get(i));
+        }
+    }
+
+    public void modifyGroceryItem(int position, String newItem) {
+        groceryList.set(position, newItem);
+        System.out.println("Grocery Item " + (position+1) + " has been modified.");
+        // position+1 b/c humans speak 1,2,3,... while computers speak 0,1,2,...
+    }
+
+    public void removeGroceryItem(int position) {
+        String theItem = groceryList.get(position);
+        groceryList.remove(position);
+        System.out.println("Removed item " + theItem);
+    }
+
+}
+```
+
+----
+# Lec 106 ArrayList Part 2
+
+Cont. from Lec 105
+
+Making our main class act as a console menu application for making a grocery list
+```java
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+//    private static int[] baseData = new int[10];
+    private static Scanner scanner = new Scanner(System.in);
+    private static GroceryList groceryList = new GroceryList();
+
+    public static void main(String[] args) {
+	    // write your code here
+//        System.out.println("Enter 10 integers:");
+//        getInput();
+//        printArray(baseData);
+//        resizeArray();
+//        System.out.println("Enter 12 integers:");
+//        getInput();
+//        printArray(baseData);
+        boolean quit = false;
+        int choice = 0;
+        printInstructions();
+        while (!quit) {
+            System.out.println("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // flush
+
+            switch (choice) {
+                case 0:
+                    printInstructions();
+                    break;
+                case 1:
+                    groceryList.printGroceryList();
+                    break;
+                case 2:
+                    addItem();
+                    break;
+                case 3:
+                    modifyItem();
+                    break;
+                case 4:
+                    removeItem();
+                    break;
+                case 5:
+                    searchForItem();
+                    break;
+                case 6:
+                    quit = true;
+                    break;
+            }
+        }
+    }
+
+    public static void printInstructions() {
+        System.out.println("\nPress ");
+        System.out.println("\t 0 - To print choice options.");
+        System.out.println("\t 1 - To print the list of grocery items.");
+        System.out.println("\t 2 - To add an item to the list.");
+        System.out.println("\t 3 - To modify an item in the list.");
+        System.out.println("\t 4 - To remove an item in the list.");
+        System.out.println("\t 5 - To search for an item in the list.");
+        System.out.println("\t 6 - To quit.");
+    }
+
+    public static void addItem() {
+        System.out.println("Please enter the grocery item: ");
+        groceryList.addGroceryItem(scanner.nextLine());
+    }
+
+    public static void modifyItem() {
+        System.out.println("Enter item number: ");
+        int itemNumber = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter replacement item: ");
+        String newItem = scanner.nextLine();
+        groceryList.modifyGroceryItem(itemNumber-1, newItem);
+    }
+
+    public static void removeItem() {
+        System.out.println("Enter item number: ");
+        int itemNo = scanner.nextInt();
+        scanner.nextLine();
+        groceryList.removeGroceryItem(itemNo-1);
+    }
+
+    public static void searchForItem() {
+        System.out.println("Item to search for: ");
+        String searchItem = scanner.nextLine();
+        if (groceryList.findItem(searchItem) != null) {
+            System.out.println("Found " + searchItem + " in our grocery list");
+        } else {
+            System.out.println(searchItem + " is not in our grocery list");
+        }
+    }
+
+}
+```
+
+----
+
+
+## Code
+
+Main.java
+
+```java
+package com.company;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+    private static Scanner scanner = new Scanner(System.in);
+    private static GroceryList groceryList = new GroceryList();
+
+    public static void main(String[] args) {
+	    // write your code here
+        boolean quit = false;
+        int choice = 0;
+        printInstructions();
+        while (!quit) {
+            System.out.println("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // flush
+
+            switch (choice) {
+                case 0:
+                    printInstructions();
+                    break;
+                case 1:
+                    groceryList.printGroceryList();
+                    break;
+                case 2:
+                    addItem();
+                    break;
+                case 3:
+                    modifyItem();
+                    break;
+                case 4:
+                    removeItem();
+                    break;
+                case 5:
+                    searchForItem();
+                    break;
+                case 6:
+                    processArrayList();
+                    break;
+                case 7:
+                    quit = true;
+                    break;
+            }
+        }
+    }
+
+    public static void printInstructions() {
+        System.out.println("\nPress ");
+        System.out.println("\t 0 - To print choice options.");
+        System.out.println("\t 1 - To print the list of grocery items.");
+        System.out.println("\t 2 - To add an item to the list.");
+        System.out.println("\t 3 - To modify an item in the list.");
+        System.out.println("\t 4 - To remove an item in the list.");
+        System.out.println("\t 5 - To search for an item in the list.");
+        System.out.println("\t 6 - Process ArrayList");
+        System.out.println("\t 7 - To quit.");
+    }
+
+    public static void addItem() {
+        System.out.println("Please enter the grocery item: ");
+        groceryList.addGroceryItem(scanner.nextLine());
+    }
+
+    public static void modifyItem() {
+        System.out.println("Enter item number: ");
+        String itemNumber = scanner.nextLine();
+        System.out.println("Enter replacement item: ");
+        String newItem = scanner.nextLine();
+        groceryList.modifyGroceryItem(itemNumber, newItem);
+    }
+
+    public static void removeItem() {
+        System.out.println("Enter item name: ");
+        String itemNo = scanner.nextLine();
+        groceryList.removeGroceryItem(itemNo);
+    }
+
+    public static void searchForItem() {
+        System.out.println("Item to search for: ");
+        String searchItem = scanner.nextLine();
+        if (groceryList.onFile(searchItem)) {
+            System.out.println("Found " + searchItem + " in our grocery list");
+        } else {
+            System.out.println(searchItem + " is not in our grocery list");
+        }
+    }
+
+    public static void processArrayList() {
+        ArrayList<String> newArray = new ArrayList<String>();
+        newArray.addAll(groceryList.getGroceryList());
+
+        ArrayList<String> nextArray = new ArrayList<>(groceryList.getGroceryList()); // Copy constructor
+
+        String[] myArray = new String[groceryList.getGroceryList().size()];
+        myArray = groceryList.getGroceryList().toArray(myArray);
+
+        System.out.println("groceryList = " + groceryList.getGroceryList().toString());
+        System.out.println("newArray = " + newArray.toString());
+        System.out.println("nextArray = " + nextArray.toString());
+        System.out.println("myArray = " + Arrays.toString(myArray));
+    }
+
+}
+```
+GroceryList.java
+```java
+package com.company;
+
+import java.util.ArrayList;
+
+public class GroceryList {
+    private int[] myNumbers = new int[50];
+
+    private ArrayList<String> groceryList = new ArrayList<>();
+
+    public ArrayList<String> getGroceryList() {
+        return groceryList;
+    }
+
+    public void addGroceryItem(String item) {
+        groceryList.add(item); // Automatically add an item to the list
+        // Where it goes is "abstracted". Java takes care of this while you focus on the application.
+    }
+
+    public void printGroceryList() {
+        System.out.println("You have " + groceryList.size() + " items in the grocery list.");
+        for (int i = 0; i < groceryList.size(); i++) {
+            System.out.println((i+1) + "." + groceryList.get(i));
+        }
+    }
+
+    public void modifyGroceryItem(String currentItem, String newItem) {
+        int position = findItem(currentItem);
+        if (position >= 0) {
+            modifyGroceryItem(position, newItem);
+        }
+
+    }
+
+    public void modifyGroceryItem(int position, String newItem) {
+        groceryList.set(position, newItem);
+        System.out.println("Grocery Item " + (position+1) + " has been modified.");
+        // position+1 b/c humans speak 1,2,3,... while computers speak 0,1,2,...
+    }
+
+    public void removeGroceryItem(String item) {
+        int position = findItem(item);
+        if (position >= 0) {
+            removeGroceryItem(position);
+        }
+    }
+
+    public void removeGroceryItem(int position) {
+        String theItem = groceryList.get(position);
+        groceryList.remove(position);
+        System.out.println("Removed item " + theItem);
+    }
+
+    private int findItem(String searchItem) {
+        return groceryList.indexOf(searchItem);
+    }
+
+    public boolean onFile(String searchItem) {
+        int position = findItem(searchItem);
+        return position >= 0;
+    }
+
+}
+```
+output
+```
+
+Press 
+	 0 - To print choice options.
+	 1 - To print the list of grocery items.
+	 2 - To add an item to the list.
+	 3 - To modify an item in the list.
+	 4 - To remove an item in the list.
+	 5 - To search for an item in the list.
+	 6 - Process ArrayList
+	 7 - To quit.
+Enter your choice: 
+2
+Please enter the grocery item: 
+Cheese
+Enter your choice: 
+2
+Please enter the grocery item: 
+Beef
+Enter your choice: 
+2
+Please enter the grocery item: 
+Milk
+Enter your choice: 
+1
+You have 3 items in the grocery list.
+1.Cheese
+2.Beef
+3.Milk
+Enter your choice: 
+6
+groceryList = [Cheese, Beef, Milk]
+newArray = [Cheese, Beef, Milk]
+nextArray = [Cheese, Beef, Milk]
+myArray = [Cheese, Beef, Milk]
+Enter your choice: 
+7
+
+Process finished with exit code 0
+```
+
+----
+# Lec 99 Arrays
+
+## Array
+* Collection of data
+* Data structure to store a sequence of values of the same type
+* Strings - sequence of characters
+
+## Code #1
+* Make array
+* For loop on array
+* Print from array
+* Print array independent of size
+
+Main.java
+```java
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // write your code here
+        // Example dec and init
+        // int myVariable = 50;
+         int[] myVariable; // Note the brackets; alerts Java to the array type
+         myVariable = new int[10]; // 10 is the size of the array
+
+        // Single line
+        int[] myIntArray = new int[10];
+        myIntArray[5] = 50; // This assigns the 6th element to 50. Arrays are indexed from ZERO.
+
+        // Also works for other types
+        double[] myDoubleArray = new double[10];
+
+        // Access and print to console
+        System.out.println(myIntArray[5]); // prints 50
+
+        // initialize every value
+        myIntArray[0] = 45;
+        myIntArray[1] = 47;
+
+        // Shorthand; only applies to the initializer
+        int[] myIntArray2 = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        System.out.println(myIntArray2[0]); // prints 1
+        System.out.println(myIntArray2[6]); // prints 7
+        System.out.println(myIntArray2[8]); // prints 9
+
+        // We can also use a for loop to initialize
+        int[] myIntArray3 = new int[10];
+        for (int i = 0; i < 10; i++) {
+            myIntArray3[i] = i*10;
+        }
+        // Now demonstrate with a for loop print
+        for (int i = 0; i < 10; i++) {
+            System.out.println("Element " + i + ", value is " + myIntArray3[i]);
+        }
+
+        // You can also use the ".length" field to access the length of the area w/out hard coding
+        for (int i = 0; i < myIntArray3.length; i++) {
+            myIntArray3[i] = i*20;
+        }
+        // for (int i = 0; i < 10; i++) {
+        //     System.out.println("Element " + i + ", value is " + myIntArray3[i]);
+        // }
+        printArray(myIntArray3);
+        // this makes it easier to change the size of the array to say 20 and the loop would still work
+
+        // Note you will get an "ArrayIndexOutOfBoundsException" exception if the loop starts too soon or goes too long
+    }
+
+    // Function to print array
+    // Demonstrate how to pass array to function
+    public static void printArray(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.println("Element " + i + ", value is " + array[i]);
+        }
+    }
+}
+```
+## Code #2
+* Use scanner class to put ints into an array
+* Average all elements in an array
+
+Main.java
+```java
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    // Using the scanner class with Arrays
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        // Spin up a new array and make it equal to the result of a function
+        int[] myIntegers = getIntegers(5);
+
+        // Print the array
+        printArray(myIntegers);
+
+        // Print the average of those numbers the users entered
+        System.out.println("The average is " + getAverage(myIntegers));
+    }
+
+    // Use the scanner to get integers an pack them into a int[] array
+    // Parameter number is the size of the array
+    public static int[] getIntegers(int number) {
+        // Alert user to enter numbers
+        System.out.println("Enter " + number + " integer values.\r");
+
+        // Make holding array
+        int[] values = new int[number];
+
+        // For each index in the array accept an answer
+        for (int i = 0; i < values.length; i++) {
+            // Accept number, put it in the values[i] index of the values array
+            values[i] = scanner.nextInt();
+        }
+
+        // return the int[]
+        return values;
+    }
+
+    // print each element of the array
+    public static void printArray(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.println("Element " + i + ", value is " + array[i]);
+        }
+    }
+
+    // get the average for every element in the int[] array
+    public static double getAverage(int[] array) {
+        int sum = 0;
+        for (int i = 0; i < array.length; i++) {
+            sum += array[i];
+        }
+        return ((double) sum / (double) array.length); // Must cast to double
+    }
+}
+```
+
+----
