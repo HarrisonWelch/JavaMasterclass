@@ -38,7 +38,7 @@ public class Main {
         }
 
         // Insertion
-        // ArrayList insertion is inefficient
+        // ArrayList insertion is inefficient, requiring moving the entire array down by one
         // LinkList insertion is near instantaneous
 
     }
