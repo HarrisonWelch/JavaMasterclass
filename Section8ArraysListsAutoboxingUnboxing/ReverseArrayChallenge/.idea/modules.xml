@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Lec104ReverseArrayChallenge.iml" filepath="$PROJECT_DIR$/Lec104ReverseArrayChallenge.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ReverseArrayChallenge.iml" filepath="$PROJECT_DIR$/ReverseArrayChallenge.iml" />
     </modules>
   </component>
 </project>
