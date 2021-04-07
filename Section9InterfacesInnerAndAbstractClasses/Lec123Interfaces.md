@@ -5,6 +5,8 @@
 * You MUST implement all methods
   * if one is not ned
 * IntelliJ can do some of this for you
+* Naming structure for interfaces is to have a leading "I" in front of the interface's name
+  * Example "ITelephone"
 
 ## Code
 Main.java
@@ -15,10 +17,10 @@ public class Main {
 
     public static void main(String[] args) {
 	    // write your code here
-        DeskPhone timsPhone;
+        ITelephone timsPhone;
         timsPhone = new DeskPhone(1234567);
         timsPhone.powerOn();
-        timsPhone.callPhone(9876543);
+        timsPhone.callPhone(1234567);
         timsPhone.answer();
     }
 }
@@ -83,4 +85,10 @@ public class DeskPhone implements ITelephone {
         return isRinging;
     }
 }
+```
+output
+```
+No action taken, desk phone does not have a power button
+Ring ring
+Answering the desk phone
 ```

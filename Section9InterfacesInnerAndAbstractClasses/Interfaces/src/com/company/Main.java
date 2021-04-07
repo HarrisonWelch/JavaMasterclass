@@ -4,10 +4,15 @@ public class Main {
 
     public static void main(String[] args) {
 	    // write your code here
-        DeskPhone timsPhone;
+        ITelephone timsPhone;
         timsPhone = new DeskPhone(1234567);
         timsPhone.powerOn();
-        timsPhone.callPhone(9876543);
+        timsPhone.callPhone(1234567);
+        timsPhone.answer();
+
+        timsPhone = new MobilePhone(24565);
+//        timsPhone.powerOn();
+        timsPhone.callPhone(24565);
         timsPhone.answer();
     }
 }
