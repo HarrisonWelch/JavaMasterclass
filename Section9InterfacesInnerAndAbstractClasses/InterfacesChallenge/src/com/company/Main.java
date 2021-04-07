@@ -7,6 +7,24 @@ public class Main {
 
     public static void main(String[] args) {
 	    // Write your code here
+        System.out.println("Players:");
+        ArrayList<String> stringArrayList = readValues();
+        ISaveable saveablePlayers = new Players();
+        saveablePlayers.populate(stringArrayList);
+        saveablePlayers.save();
+
+        System.out.println("Monsters:");
+        stringArrayList = readValues();
+        ISaveable saveableMonsters = new Monsters();
+        saveableMonsters.populate(stringArrayList);
+        saveableMonsters.save();
+
+        System.out.println("Dragons:");
+        stringArrayList = readValues();
+        ISaveable saveableDragons = new Dragons();
+        saveableDragons.populate(stringArrayList);
+        saveableDragons.save();
+
     }
 
     public static ArrayList<String> readValues() {
