@@ -3,7 +3,7 @@ package com.lesson._final;
 public class SomeClass {
 
     private static int classCounter = 0;
-    public int instanceNumber = 1;
+    public final int instanceNumber;
     private final String name;
 
     public SomeClass(String name) {
