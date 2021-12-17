@@ -1,3 +1,26 @@
+# Lec 154 Binary Search
+
+* Swap the ArrayList to LinkedList
+* Make it a type collection
+  * Enables any collection class
+  * This is an interface
+  * https://www.javatpoint.com/collections-in-java
+
+```java
+private Collection<Seat> seats = new LinkedList<>();
+```
+* When declared as collection we can implement any class
+  * Set, HashSet, etc.$
+* Change to HashSet, notice the change in order but it still works
+* TreeSet does not work, throws class cast exception.
+* LinkedHashSet does work
+
+* This algorithm is brute force searching'
+* Lets implement a better strategy
+* The DOT will show us how long the algorithm takes
+
+### Theatre.java
+```java
 package com.lesson;
 
 import java.util.*;
@@ -102,3 +125,56 @@ public class Theatre {
         }
     }
 }
+
+```
+
+### Main.java
+
+```java
+package com.lesson;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    // write your code here
+        Theatre theatre = new Theatre("Olympian", 8, 12);
+        //        theatre.getSeats();
+
+        if (theatre.reserveSeat("H11")) {
+            System.out.println("Please pay");
+        } else {
+            System.out.println("Sorry, seat is taken");
+        }
+
+        if (theatre.reserveSeat("H11")) {
+            System.out.println("Please pay");
+        } else {
+            System.out.println("Sorry, seat is taken");
+        }
+
+        if (theatre.reserveSeat("B13")) {
+            System.out.println("Please pay");
+        } else {
+            System.out.println("Sorry, seat is taken");
+        }
+
+        if (theatre.reserveSeat("D12")) {
+            System.out.println("Please pay");
+        } else {
+            System.out.println("Sorry, seat is taken");
+        }
+    }
+}
+```
+
+### Output
+
+```
+......Seat H11 reserved
+Please pay
+......Sorry, seat is taken
+......There is no seat B13
+Sorry, seat is taken
+.Seat D12 reserved
+Please pay
+```
